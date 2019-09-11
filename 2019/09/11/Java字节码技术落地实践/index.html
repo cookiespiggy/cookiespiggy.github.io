@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="国外某大牛提过一个学习方法，每次学习新知识的时候，都要当作你在给别人讲。  聊聊字节码技术https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html 聊聊生产中的事故实战https://mp.weixin.qq.com/s/aYwIH0TN3nSzNaMR2FN0AA 聊聊Btrace上面两篇文章都谈到了Btrace，我们">
+<meta name="description" content="国外某大牛提过一个学习方法，每次学习新知识的时候，都要当作你在给别人讲。  聊聊字节码技术字节码增强技术探索 聊聊生产中的事故实战疑案追踪：Spring Boot内存泄露排查记 聊聊Btrace上面两篇文章都谈到了Btrace，我们来聊聊Btrace。BTrace 入门教程下面的评论蛮不错的。">
 <meta name="keywords" content="Java生产环境工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java字节码技术落地实践">
 <meta property="og:url" content="http://yoursite.com/2019/09/11/Java字节码技术落地实践/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
-<meta property="og:description" content="国外某大牛提过一个学习方法，每次学习新知识的时候，都要当作你在给别人讲。  聊聊字节码技术https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html 聊聊生产中的事故实战https://mp.weixin.qq.com/s/aYwIH0TN3nSzNaMR2FN0AA 聊聊Btrace上面两篇文章都谈到了Btrace，我们">
+<meta property="og:description" content="国外某大牛提过一个学习方法，每次学习新知识的时候，都要当作你在给别人讲。  聊聊字节码技术字节码增强技术探索 聊聊生产中的事故实战疑案追踪：Spring Boot内存泄露排查记 聊聊Btrace上面两篇文章都谈到了Btrace，我们来聊聊Btrace。BTrace 入门教程下面的评论蛮不错的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T02:42:28.746Z">
+<meta property="og:updated_time" content="2019-09-11T02:45:06.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java字节码技术落地实践">
-<meta name="twitter:description" content="国外某大牛提过一个学习方法，每次学习新知识的时候，都要当作你在给别人讲。  聊聊字节码技术https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html 聊聊生产中的事故实战https://mp.weixin.qq.com/s/aYwIH0TN3nSzNaMR2FN0AA 聊聊Btrace上面两篇文章都谈到了Btrace，我们">
+<meta name="twitter:description" content="国外某大牛提过一个学习方法，每次学习新知识的时候，都要当作你在给别人讲。  聊聊字节码技术字节码增强技术探索 聊聊生产中的事故实战疑案追踪：Spring Boot内存泄露排查记 聊聊Btrace上面两篇文章都谈到了Btrace，我们来聊聊Btrace。BTrace 入门教程下面的评论蛮不错的。">
 
 
 
@@ -303,9 +303,9 @@
         <blockquote>
 <p>国外某大牛提过一个学习方法，每次学习新知识的时候，都要当作你在给别人讲。</p>
 </blockquote>
-<h1 id="聊聊字节码技术"><a href="#聊聊字节码技术" class="headerlink" title="聊聊字节码技术"></a>聊聊字节码技术</h1><p><a href>https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html</a></p>
-<h1 id="聊聊生产中的事故实战"><a href="#聊聊生产中的事故实战" class="headerlink" title="聊聊生产中的事故实战"></a>聊聊生产中的事故实战</h1><p><a href>https://mp.weixin.qq.com/s/aYwIH0TN3nSzNaMR2FN0AA</a></p>
-<h1 id="聊聊Btrace"><a href="#聊聊Btrace" class="headerlink" title="聊聊Btrace"></a>聊聊Btrace</h1><p>上面两篇文章都谈到了Btrace，我们来聊聊Btrace。<br><a href>https://mp.weixin.qq.com/s/mUISacsMq14sodO1FVd_kg</a><br>下面的评论蛮不错的。</p>
+<h1 id="聊聊字节码技术"><a href="#聊聊字节码技术" class="headerlink" title="聊聊字节码技术"></a>聊聊字节码技术</h1><p><a href="https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html" target="_blank" rel="noopener">字节码增强技术探索</a></p>
+<h1 id="聊聊生产中的事故实战"><a href="#聊聊生产中的事故实战" class="headerlink" title="聊聊生产中的事故实战"></a>聊聊生产中的事故实战</h1><p><a href="https://mp.weixin.qq.com/s/aYwIH0TN3nSzNaMR2FN0AA" target="_blank" rel="noopener">疑案追踪：Spring Boot内存泄露排查记</a></p>
+<h1 id="聊聊Btrace"><a href="#聊聊Btrace" class="headerlink" title="聊聊Btrace"></a>聊聊Btrace</h1><p>上面两篇文章都谈到了Btrace，我们来聊聊Btrace。<br><a href="https://mp.weixin.qq.com/s/mUISacsMq14sodO1FVd_kg" target="_blank" rel="noopener">BTrace 入门教程</a><br>下面的评论蛮不错的。</p>
 
       
     </div>
