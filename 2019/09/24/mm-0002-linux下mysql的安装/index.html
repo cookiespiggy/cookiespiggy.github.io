@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="linux下mysql的安装,">
+  <meta name="keywords" content="Linux下mysql的安装,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…12345678910111213141516171819202122232425linux四种安装软件的方式以及安装mysql-server https://www.cnblogs.com/yowamushi/p/8043054.html安装完成之后#1 service mysqld start#2 mysql#3 sho">
-<meta name="keywords" content="linux下mysql的安装">
+<meta name="description" content="Linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…12345678910111213141516171819202122232425Linux四种安装软件的方式以及安装mysql-server https://www.cnblogs.com/yowamushi/p/8043054.html安装完成之后#1 service mysqld start#2 mysql#3 sho">
+<meta name="keywords" content="Linux下mysql的安装">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mm_0002_linux下mysql的安装">
+<meta property="og:title" content="Linux下mysql的安装">
 <meta property="og:url" content="http://yoursite.com/2019/09/24/mm-0002-linux下mysql的安装/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
-<meta property="og:description" content="linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…12345678910111213141516171819202122232425linux四种安装软件的方式以及安装mysql-server https://www.cnblogs.com/yowamushi/p/8043054.html安装完成之后#1 service mysqld start#2 mysql#3 sho">
+<meta property="og:description" content="Linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…12345678910111213141516171819202122232425Linux四种安装软件的方式以及安装mysql-server https://www.cnblogs.com/yowamushi/p/8043054.html安装完成之后#1 service mysqld start#2 mysql#3 sho">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-24T07:35:43.558Z">
+<meta property="og:updated_time" content="2019-09-24T07:37:54.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mm_0002_linux下mysql的安装">
-<meta name="twitter:description" content="linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…12345678910111213141516171819202122232425linux四种安装软件的方式以及安装mysql-server https://www.cnblogs.com/yowamushi/p/8043054.html安装完成之后#1 service mysqld start#2 mysql#3 sho">
+<meta name="twitter:title" content="Linux下mysql的安装">
+<meta name="twitter:description" content="Linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…12345678910111213141516171819202122232425Linux四种安装软件的方式以及安装mysql-server https://www.cnblogs.com/yowamushi/p/8043054.html安装完成之后#1 service mysqld start#2 mysql#3 sho">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>mm_0002_linux下mysql的安装 | 曲奇小猪的测试博客</title>
+  <title>Linux下mysql的安装 | 曲奇小猪的测试博客</title>
   
 
 
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mm_0002_linux下mysql的安装</h1>
+          <h1 class="post-title" itemprop="name headline">Linux下mysql的安装</h1>
         
 
         <div class="post-meta">
@@ -300,7 +300,7 @@
       
 
       
-        <p>linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">linux四种安装软件的方式以及安装mysql-server </span><br><span class="line">https://www.cnblogs.com/yowamushi/p/8043054.html</span><br><span class="line">安装完成之后</span><br><span class="line"><span class="meta">#</span><span class="bash">1 service mysqld start</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2 mysql</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3 show databases;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4 use mysql;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5 show tables;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6 desc user;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">7 select host,user,password from user; // host运行哪些节点来访问，默认只允许本机进行访问，不要update这个表，要通过授权！</span></span><br><span class="line"><span class="meta">#</span><span class="bash">8 grant all privileges on *.* to <span class="string">'root'</span>@<span class="string">'%'</span>identified by <span class="string">'123'</span> with grant option; // 授予所有权限 所有库的所有表 %所有地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash">9 delete from user <span class="built_in">where</span> host != <span class="string">'%'</span>;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">10 select host,user,password from user;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">11 flush privileges;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">12 quit</span></span><br><span class="line"><span class="meta">#</span><span class="bash">12 mysql -uroot -p  //Server version: 5.6.45 MySQL Community Server (GPL) 查看版本</span></span><br><span class="line"><span class="meta">#</span><span class="bash">13 123</span></span><br><span class="line"><span class="meta">#</span><span class="bash">14 show databases;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">15 quit</span></span><br><span class="line"><span class="meta">#</span><span class="bash">16 ps -ef | grep mysqld</span></span><br><span class="line">=======开发=======</span><br><span class="line">mysql-connector-java与mysql版本的对应</span><br><span class="line">https://www.cnblogs.com/junzi/p/6893122.html</span><br><span class="line"><span class="meta">#</span><span class="bash">1 CREATE DATABASE mydatabase CHARACTER SET utf8 COLLATE utf8_general_ci;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2 show databases;</span></span><br></pre></td></tr></table></figure></p>
+        <p>Linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Linux四种安装软件的方式以及安装mysql-server </span><br><span class="line">https://www.cnblogs.com/yowamushi/p/8043054.html</span><br><span class="line">安装完成之后</span><br><span class="line"><span class="meta">#</span><span class="bash">1 service mysqld start</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2 mysql</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3 show databases;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4 use mysql;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5 show tables;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6 desc user;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">7 select host,user,password from user; // host运行哪些节点来访问，默认只允许本机进行访问，不要update这个表，要通过授权！</span></span><br><span class="line"><span class="meta">#</span><span class="bash">8 grant all privileges on *.* to <span class="string">'root'</span>@<span class="string">'%'</span>identified by <span class="string">'123'</span> with grant option; // 授予所有权限 所有库的所有表 %所有地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash">9 delete from user <span class="built_in">where</span> host != <span class="string">'%'</span>;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">10 select host,user,password from user;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">11 flush privileges;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">12 quit</span></span><br><span class="line"><span class="meta">#</span><span class="bash">12 mysql -uroot -p  //Server version: 5.6.45 MySQL Community Server (GPL) 查看版本</span></span><br><span class="line"><span class="meta">#</span><span class="bash">13 123</span></span><br><span class="line"><span class="meta">#</span><span class="bash">14 show databases;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">15 quit</span></span><br><span class="line"><span class="meta">#</span><span class="bash">16 ps -ef | grep mysqld</span></span><br><span class="line">=======开发=======</span><br><span class="line">mysql-connector-java与mysql版本的对应</span><br><span class="line">https://www.cnblogs.com/junzi/p/6893122.html</span><br><span class="line"><span class="meta">#</span><span class="bash">1 CREATE DATABASE mydatabase CHARACTER SET utf8 COLLATE utf8_general_ci;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2 show databases;</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -318,7 +318,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux下mysql的安装/" rel="tag"># linux下mysql的安装</a>
+            <a href="/tags/Linux下mysql的安装/" rel="tag"># Linux下mysql的安装</a>
           
         </div>
       
