@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Tag: mysql8.0 mysql8.+ - 曲奇小猪的测试博客</title>
+<title>Tag: 测试标签的写法 - 曲奇小猪的测试博客</title>
 
 
     <meta name="description" content="天津理工大学(11级计算机系)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="曲奇小猪的测试博客">
-<meta property="og:url" content="http://yoursite.com/tags/mysql8-0-mysql8/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/测试标签的写法/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
 <meta property="og:description" content="天津理工大学(11级计算机系)">
 <meta property="og:locale" content="zh-Hans">
@@ -146,7 +146,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">mysql8.0 mysql8.+</a></li>
+            <li class="is-active"><a href="#" aria-current="page">测试标签的写法</a></li>
         </ul>
         </nav>
     </div>
@@ -158,13 +158,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-12T15:13:06.000Z">2019-05-12</time>
+                <time class="level-item has-text-grey" datetime="2019-09-25T01:19:41.000Z">2019-09-25</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 54 words)
+                    a few seconds read (About 57 words)
                 </span>
                 
                 
@@ -173,11 +173,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/05/12/caching-sha2-password/">caching_sha2_password</a>
+                <a class="has-link-black-ter" href="/2019/09/25/mm-0005-动态数据源配置（一）/">mm_0005_动态数据源配置（一）</a>
             
         </h1>
         <div class="content">
-            <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql -h localhost -u root -p</span><br><span class="line"></span><br><span class="line">use mysql;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 'root'@'%'所有服务器</span></span><br><span class="line"><span class="hljs-comment"># 'root'@'localhost' 本机</span></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'root'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'123456'</span>;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'mybatis'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'mybatis'</span>;</span><br><span class="line"></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br></pre></td></tr></table></figure>
+            <p>本文先结合spring，研究一下动态配置数据源是怎么玩的。工作中有遇到过，先玩玩嘿嘿，顺便测试一下我这博客，虽然还不太成熟。</p>
 
         </div>
         

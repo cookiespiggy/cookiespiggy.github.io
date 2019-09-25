@@ -7,20 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Tag: mysql8.0 mysql8.+ - 曲奇小猪的测试博客</title>
+<title>mm_0005_动态数据源配置（一） - 曲奇小猪的测试博客</title>
 
 
-    <meta name="description" content="天津理工大学(11级计算机系)">
-<meta property="og:type" content="website">
-<meta property="og:title" content="曲奇小猪的测试博客">
-<meta property="og:url" content="http://yoursite.com/tags/mysql8-0-mysql8/index.html">
+    <meta name="description" content="本文先结合spring，研究一下动态配置数据源是怎么玩的。工作中有遇到过，先玩玩嘿嘿，顺便测试一下我这博客，虽然还不太成熟。">
+<meta name="keywords" content="测试标签的写法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mm_0005_动态数据源配置（一）">
+<meta property="og:url" content="http://yoursite.com/2019/09/25/mm-0005-动态数据源配置（一）/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
-<meta property="og:description" content="天津理工大学(11级计算机系)">
+<meta property="og:description" content="本文先结合spring，研究一下动态配置数据源是怎么玩的。工作中有遇到过，先玩玩嘿嘿，顺便测试一下我这博客，虽然还不太成熟。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-09-25T01:28:40.696Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="曲奇小猪的测试博客">
-<meta name="twitter:description" content="天津理工大学(11级计算机系)">
+<meta name="twitter:title" content="mm_0005_动态数据源配置（一）">
+<meta name="twitter:description" content="本文先结合spring，研究一下动态配置数据源是怎么玩的。工作中有遇到过，先玩玩嘿嘿，顺便测试一下我这博客，虽然还不太成熟。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -91,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
+                <img src="/images/logo.svg" alt="mm_0005_动态数据源配置（一）" height="28">
             
             </a>
         </div>
@@ -142,29 +144,18 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">mysql8.0 mysql8.+</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-12T15:13:06.000Z">2019-05-12</time>
+                <time class="level-item has-text-grey" datetime="2019-09-25T01:19:41.000Z">2019-09-25</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 54 words)
+                    a few seconds read (About 57 words)
                 </span>
                 
                 
@@ -173,12 +164,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/05/12/caching-sha2-password/">caching_sha2_password</a>
+                mm_0005_动态数据源配置（一）
             
         </h1>
         <div class="content">
-            <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql -h localhost -u root -p</span><br><span class="line"></span><br><span class="line">use mysql;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 'root'@'%'所有服务器</span></span><br><span class="line"><span class="hljs-comment"># 'root'@'localhost' 本机</span></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'root'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'123456'</span>;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'mybatis'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'mybatis'</span>;</span><br><span class="line"></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br></pre></td></tr></table></figure>
+            <p>本文先结合spring，研究一下动态配置数据源是怎么玩的。工作中有遇到过，先玩玩嘿嘿，顺便测试一下我这博客，虽然还不太成熟。</p>
 
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/测试标签的写法/">测试标签的写法</a>
+                </div>
+            </div>
         </div>
         
         
@@ -188,9 +188,55 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/25/mm-0004-ssh命令的神器妙用/">
+                <span class="level-item">mm_0004_ssh命令的神器妙用</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -850,7 +896,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
+                    <img src="/images/logo.svg" alt="mm_0005_动态数据源配置（一）" height="28">
                 
                 </a>
                 <p class="is-size-7">
