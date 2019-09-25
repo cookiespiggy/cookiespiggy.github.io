@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Archivos - 曲奇小猪的测试博客</title>
+<title>Etiqueta: xcall ssh - 曲奇小猪的测试博客</title>
 
 
     <meta name="description" content="天津理工大学(11级计算机系)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="曲奇小猪的测试博客">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/xcall-ssh/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
 <meta property="og:description" content="天津理工大学(11级计算机系)">
 <meta property="og:locale" content="zh-Hans">
@@ -141,84 +141,73 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-        
-<div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-09T06:22:57.000Z">2019-05-09</time>
-                        <a href="/2019/05/09/Java面试/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-08T08:58:14.000Z">2019-05-08</time>
-                        <a href="/2019/05/08/usemweb/" class="title has-link-black-ter is-size-6 has-text-weight-normal">usemweb</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-08T08:34:29.000Z">2019-05-08</time>
-                        <a href="/2019/05/08/hello-world/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-        </div>
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">Etiquetas</a></li>
+            <li class="is-active"><a href="#" aria-current="page">xcall ssh</a></li>
+        </ul>
+        </nav>
     </div>
 </div>
 
+    <div class="card">
     
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-25T00:59:02.000Z">2019-09-25</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 179 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/09/25/mm-0004-ssh命令的神器妙用/">mm_0004_ssh命令的神器妙用</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>工作中，集群如果太多，每次登陆到各个节点再去执行一些其他命令太麻烦，ssh的妙用就很重要了。</p>
+</blockquote>
+<ol>
+<li>首先编写xcall</li>
+<li>配置xcall到环境变量</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/sh</span></span><br><span class="line">pcount=$#</span><br><span class="line">if((pcount==0));then echo no args;exit;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">user=`whoami`</span><br><span class="line"></span><br><span class="line">for host in &#123;node1,node2,node3&#125;;do</span><br><span class="line">echo ---------------------------------$host-----------------------------------</span><br><span class="line">ssh $user@$host "source /etc/profile ; $@"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>说明</p>
+<ol>
+<li>双引号，必须有。如果不加双引号，后面的命令在本地执行</li>
+<li>分号，两个命令之间用分号隔开</li>
+<li>$@表示所有的参数</li>
+<li>暂时先这么用着，如果集群多了，就把i设为范围值，所以推荐给主机起名字</li>
+<li>参考<a href="https://blog.csdn.net/jinking01/article/details/84386769" target="_blank" rel="noopener">https://blog.csdn.net/jinking01/article/details/84386769</a></li>
+</ol>
 
-    
-<div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/">Anterior</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/3/">Siguiente</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/">1</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+        
+        
+    </div>
 </div>
+
+
+
+
+
+
+
+
 </div>
                 
 
