@@ -148,6 +148,47 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-12T15:13:06.000Z">2019-05-12</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 54 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/12/caching-sha2-password/">caching_sha2_password</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql -h localhost -u root -p</span><br><span class="line"></span><br><span class="line">use mysql;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 'root'@'%'所有服务器</span></span><br><span class="line"><span class="hljs-comment"># 'root'@'localhost' 本机</span></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'root'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'123456'</span>;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'mybatis'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'mybatis'</span>;</span><br><span class="line"></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-05-09T14:14:37.000Z">2019-05-09</time>
                 
                 
@@ -281,7 +322,7 @@
 <h2 id="帮助我们改进-MWeb"><a href="#帮助我们改进-MWeb" class="headerlink" title="帮助我们改进 MWeb"></a>帮助我们改进 MWeb</h2><p>如果你喜欢 MWeb，想让它变得更好，你可以：</p>
 <ol>
 <li>推荐 MWeb，让更多的人知道。</li>
-<li>给我们发反馈和建议：<a href="mailto:&#99;&#111;&#100;&#101;&#x72;&#x66;&#111;&#114;&#x61;&#114;&#116;&#43;&#x32;&#x33;&#x33;&#x33;&#64;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#99;&#111;&#100;&#101;&#x72;&#x66;&#111;&#114;&#x61;&#114;&#116;&#43;&#x32;&#x33;&#x33;&#x33;&#64;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a></li>
+<li>给我们发反馈和建议：<a href="mailto:&#x63;&#x6f;&#x64;&#101;&#114;&#102;&#111;&#114;&#x61;&#114;&#116;&#43;&#x32;&#x33;&#51;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;" target="_blank" rel="noopener">&#x63;&#x6f;&#x64;&#101;&#114;&#102;&#111;&#114;&#x61;&#114;&#116;&#43;&#x32;&#x33;&#51;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a></li>
 <li>在 Mac App Store 上评价 （如果是在 MAS 上购买的话）。</li>
 </ol>
 
@@ -353,10 +394,10 @@
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/">Anterior</a>
         </div>
         <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -408,17 +449,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
-                        14
+                        15
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -428,17 +469,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
-                        10
+                        11
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/cookiespiggy" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -530,7 +571,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             
@@ -543,9 +584,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
-        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
+        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
     </div>
 </div>
 
@@ -557,8 +598,27 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/26/mm-0006-手写线程池/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="手写线程池">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T07:35:28.000Z">2019-09-26</time></div>
+                    <a href="/2019/09/26/mm-0006-手写线程池/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手写线程池</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -636,25 +696,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/24/mm-0001-SSM配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSM配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T07:19:19.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/mm-0001-SSM配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SSM配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -663,7 +704,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -673,7 +714,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -698,13 +739,20 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java生产环境工具/">
                         <span class="tag">Java生产环境工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java线程池原理-demo/">
+                        <span class="tag">Java线程池原理 demo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -792,8 +840,27 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/26/mm-0006-手写线程池/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="手写线程池">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T07:35:28.000Z">2019-09-26</time></div>
+                    <a href="/2019/09/26/mm-0006-手写线程池/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手写线程池</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -871,25 +938,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/24/mm-0001-SSM配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSM配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T07:19:19.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/mm-0001-SSM配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SSM配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -898,7 +946,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -908,7 +956,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -933,13 +981,20 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java生产环境工具/">
                         <span class="tag">Java生产环境工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java线程池原理-demo/">
+                        <span class="tag">Java线程池原理 demo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1191,10 +1246,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

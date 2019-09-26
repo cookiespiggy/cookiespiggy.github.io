@@ -7,20 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Etiqueta: 测试标签的写法 - 曲奇小猪的测试博客</title>
+<title>手写线程池 - 曲奇小猪的测试博客</title>
 
 
-    <meta name="description" content="天津理工大学(11级计算机系)">
-<meta property="og:type" content="website">
-<meta property="og:title" content="曲奇小猪的测试博客">
-<meta property="og:url" content="http://yoursite.com/tags/测试标签的写法/index.html">
+    <meta name="description" content="手写线程池的思路代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051import java.util.concurrent.BlockingQueue;import java.util.concurrent.LinkedBlockingQueue;/** *">
+<meta name="keywords" content="Java线程池原理 demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写线程池">
+<meta property="og:url" content="http://yoursite.com/2019/09/26/mm-0006-手写线程池/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
-<meta property="og:description" content="天津理工大学(11级计算机系)">
+<meta property="og:description" content="手写线程池的思路代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051import java.util.concurrent.BlockingQueue;import java.util.concurrent.LinkedBlockingQueue;/** *">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-09-26T14:28:56.621Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="曲奇小猪的测试博客">
-<meta name="twitter:description" content="天津理工大学(11级计算机系)">
+<meta name="twitter:title" content="手写线程池">
+<meta name="twitter:description" content="手写线程池的思路代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051import java.util.concurrent.BlockingQueue;import java.util.concurrent.LinkedBlockingQueue;/** *">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -91,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
+                <img src="/images/logo.svg" alt="手写线程池" height="28">
             
             </a>
         </div>
@@ -142,29 +144,18 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Etiquetas</a></li>
-            <li class="is-active"><a href="#" aria-current="page">测试标签的写法</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-25T01:19:41.000Z">2019-09-25</time>
+                <time class="level-item has-text-grey" datetime="2019-09-26T07:35:28.000Z">2019-09-26</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 57 words)
+                    a minute read (About 132 words)
                 </span>
                 
                 
@@ -173,12 +164,22 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/09/25/mm-0005-动态数据源配置（一）/">动态数据源配置（一）</a>
+                手写线程池
             
         </h1>
         <div class="content">
-            <p>本文先结合spring，研究一下动态配置数据源是怎么玩的。工作中有遇到过，先玩玩嘿嘿，顺便测试一下我这博客，虽然还不太成熟。</p>
+            <p>手写线程池的思路代码</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.util.concurrent.BlockingQueue;</span><br><span class="line"><span class="hljs-keyword">import</span> java.util.concurrent.LinkedBlockingQueue;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * 基于生产消费模型的线程池 &#123;<span class="hljs-doctag">@link</span> java.util.concurrent.ThreadPoolExecutor&#125;</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> cookiespiggy</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThreadPoolExecutor</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/* 线程数大小**/</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> threadSize;</span><br><span class="line">    <span class="hljs-comment">/* 内部worker队列**/</span></span><br><span class="line">    <span class="hljs-keyword">private</span> BlockingQueue&lt;Runnable&gt; workerQueue;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyThreadPoolExecutor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> coreSize, <span class="hljs-keyword">int</span> workerQueueSize)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.workerQueue = <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;&gt;(workerQueueSize);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; coreSize; i++) &#123;</span><br><span class="line">            WorkerThread worker = <span class="hljs-keyword">new</span> WorkerThread(i);</span><br><span class="line">            worker.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/* commit task**/</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable task)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            workerQueue.put(task);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="hljs-comment">// TODO</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WorkerThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WorkerThread</span><span class="hljs-params">(<span class="hljs-keyword">int</span> threadIndex)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>(<span class="hljs-string">"Thread-"</span> + threadIndex);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">            <span class="hljs-comment">/* loop task task if no -&gt;blocking**/</span></span><br><span class="line">            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;</span><br><span class="line">                <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">                    Runnable task = workerQueue.take();</span><br><span class="line">                    task.run();</span><br><span class="line">                &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    <span class="hljs-comment">// TODO</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Java线程池原理-demo/">Java线程池原理 demo</a>
+                </div>
+            </div>
         </div>
         
         
@@ -188,9 +189,55 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/25/mm-0005-动态数据源配置（一）/">
+                <span class="level-item">动态数据源配置（一）</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -864,7 +911,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
+                    <img src="/images/logo.svg" alt="手写线程池" height="28">
                 
                 </a>
                 <p class="is-size-7">
