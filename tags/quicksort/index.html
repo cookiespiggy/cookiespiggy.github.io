@@ -7,22 +7,20 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>并发(01) - 曲奇小猪的测试博客</title>
+<title>Tag: quicksort - 曲奇小猪的测试博客</title>
 
 
-    <meta name="description" content="操作系统层JVM的线程模型实现是用户态多个线程映射成了内核态的一个线程这里就衍生出了IO密集型和计算密集型开多少线程的问题？计算密集型 那就是1:1IO密集型 …也不能太多，线程切换也是有性能损耗的 多线程编程的特点 同一份代码，可以有多个线程执行  既可以在一个CPU核上并发执行 又可以在多个CPU核上并行执行   线程的执行默认是乱序的  程序员不能假定执行次序   线程会共享数据  需要互斥">
-<meta name="keywords" content="并发 面试">
-<meta property="og:type" content="article">
-<meta property="og:title" content="并发(01)">
-<meta property="og:url" content="http://yoursite.com/2019/05/20/并发-01/index.html">
+    <meta name="description" content="天津理工大学(11级计算机系)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="曲奇小猪的测试博客">
+<meta property="og:url" content="http://yoursite.com/tags/quicksort/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
-<meta property="og:description" content="操作系统层JVM的线程模型实现是用户态多个线程映射成了内核态的一个线程这里就衍生出了IO密集型和计算密集型开多少线程的问题？计算密集型 那就是1:1IO密集型 …也不能太多，线程切换也是有性能损耗的 多线程编程的特点 同一份代码，可以有多个线程执行  既可以在一个CPU核上并发执行 又可以在多个CPU核上并行执行   线程的执行默认是乱序的  程序员不能假定执行次序   线程会共享数据  需要互斥">
+<meta property="og:description" content="天津理工大学(11级计算机系)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-20T10:02:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发(01)">
-<meta name="twitter:description" content="操作系统层JVM的线程模型实现是用户态多个线程映射成了内核态的一个线程这里就衍生出了IO密集型和计算密集型开多少线程的问题？计算密集型 那就是1:1IO密集型 …也不能太多，线程切换也是有性能损耗的 多线程编程的特点 同一份代码，可以有多个线程执行  既可以在一个CPU核上并发执行 又可以在多个CPU核上并行执行   线程的执行默认是乱序的  程序员不能假定执行次序   线程会共享数据  需要互斥">
+<meta name="twitter:title" content="曲奇小猪的测试博客">
+<meta name="twitter:description" content="天津理工大学(11级计算机系)">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -93,7 +91,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="并发(01)" height="28">
+                <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
             
             </a>
         </div>
@@ -144,18 +142,29 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">Tags</a></li>
+            <li class="is-active"><a href="#" aria-current="page">quicksort</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-20T09:03:14.000Z">2019-05-20</time>
+                <time class="level-item has-text-grey" datetime="2019-09-27T10:13:17.000Z">2019-09-27</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 915 words)
+                    a few seconds read (About 29 words)
                 </span>
                 
                 
@@ -164,86 +173,12 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                并发(01)
+                <a class="has-link-black-ter" href="/2019/09/27/mm-0007-排序算法之快排/">排序算法之快排</a>
             
         </h1>
         <div class="content">
-            <h1 id="操作系统层"><a href="#操作系统层" class="headerlink" title="操作系统层"></a>操作系统层</h1><h2 id="JVM的线程模型实现"><a href="#JVM的线程模型实现" class="headerlink" title="JVM的线程模型实现"></a>JVM的线程模型实现</h2><p>是用户态多个线程映射成了内核态的一个线程<br>这里就衍生出了IO密集型和计算密集型开多少线程的问题？<br>计算密集型 那就是1:1<br>IO密集型 …也不能太多，线程切换也是有性能损耗的</p>
-<h2 id="多线程编程的特点"><a href="#多线程编程的特点" class="headerlink" title="多线程编程的特点"></a>多线程编程的特点</h2><ul>
-<li><p>同一份代码，可以有多个线程执行</p>
-<ul>
-<li>既可以在一个CPU核上并发执行</li>
-<li>又可以在多个CPU核上并行执行</li>
-</ul>
-</li>
-<li><p>线程的执行默认是乱序的</p>
-<ul>
-<li>程序员不能假定执行次序</li>
-</ul>
-</li>
-<li><p>线程会共享数据</p>
-<ul>
-<li>需要互斥</li>
-</ul>
-</li>
-<li><p>线程之间也需要合作（比如我写完什么东西，你再去读）</p>
-<ul>
-<li>需要同步</li>
-</ul>
-</li>
-</ul>
-<p>？？？ 这里又有点乱，不过没关系，先研究互斥和同步！<br>多线程的BUG来源：原子性、可见性、有序性</p>
-<ul>
-<li>互斥</li>
-<li>同步</li>
-</ul>
-<h3 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h3><p>互斥怎么实现？其实这个概念在操作系统中已经研究得非常非常透彻了。互斥，本质上就是加锁。<br>面试题：</p>
-<ol>
-<li>如何实现互斥？<br> 答案：加锁！<ul>
-<li>只有获得了锁的线程，才能够对共享资源做操作，换句话说：进入临界区</li>
-<li>对共享资源做完操作（即使发生异常），一定要释放锁！</li>
-</ul>
-</li>
-<li>锁到底是个什么东西？<br> 需要保证原子性。最底层需要硬件指令的支持。需要锁住总线。</li>
-</ol>
-<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1><h2 id="设计锁的时候需要考虑的问题"><a href="#设计锁的时候需要考虑的问题" class="headerlink" title="设计锁的时候需要考虑的问题"></a>设计锁的时候需要考虑的问题</h2><ul>
-<li>线程申请锁的时候，发现已经被别的线程持有，该线程应该怎么办？<ul>
-<li>继续尝试，无限循环<ul>
-<li>然后每个线程基于被分配的时间片内跑，时间片用完了，ok，对不起，请退出CPU，变为就绪状态，进入就绪队列，等待下次系统调度。</li>
-<li>这种锁称为自旋锁<ul>
-<li>就是你的线程一直在尝试，一直尝试到你的时间片用光了，退出CPU，过一会又被调度了，又无限循环尝试。。。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>把线程放到阻塞队列中<ul>
-<li>既然你拿不到锁，那么请你进入阻塞队列。</li>
-<li>阻塞队列可能有很多线程都在等待，有一个线程离开了临界区，释放锁了，大家可以去抢这把锁了，此时操作系统会把队列中的线程，采用某种策略拿出来一个去执行</li>
-</ul>
-</li>
-</ul>
-<h2 id="可重入性"><a href="#可重入性" class="headerlink" title="可重入性"></a>可重入性</h2><ul>
-<li>自旋锁无法重入</li>
-<li>解决办法<ul>
-<li>记录这个锁被谁持有</li>
-<li>记录重入的次数</li>
-</ul>
-</li>
-</ul>
-<h2 id="线程之间的通信"><a href="#线程之间的通信" class="headerlink" title="线程之间的通信"></a>线程之间的通信</h2><h3 id="1-常用通过共享变量"><a href="#1-常用通过共享变量" class="headerlink" title="1. 常用通过共享变量"></a>1. 常用通过共享变量</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 共享变量</span></span><br><span class="line"><span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> loaded = <span class="hljs-keyword">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程A</span></span><br><span class="line">doSomething();</span><br><span class="line">loaded = <span class="hljs-keyword">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程B</span></span><br><span class="line"><span class="hljs-keyword">while</span>(!loaded) &#123;</span><br><span class="line">    <span class="hljs-comment">// doSomething</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-wait-notify"><a href="#2-wait-notify" class="headerlink" title="2. wait/notify"></a>2. wait/notify</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> loaded = <span class="hljs-keyword">false</span>;</span><br><span class="line">Object monitor = <span class="hljs-keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程A</span></span><br><span class="line">doSomething();</span><br><span class="line"><span class="hljs-keyword">synchronized</span>(monitor) &#123;</span><br><span class="line">    loaded = <span class="hljs-keyword">true</span>;</span><br><span class="line">    monitor.notify();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程B</span></span><br><span class="line"><span class="hljs-keyword">synchronized</span>(monitor) &#123;</span><br><span class="line">    <span class="hljs-keyword">while</span>(!loaded) &#123; </span><br><span class="line">        monitor.wait(); <span class="hljs-comment">// 进入阻塞队列，会释放锁,当别的线程调用monitor.notify() 的时候，只是被唤醒，并不能立即退出monitor.wait()的调用，而是还要去获取这把锁。while(条件不满足) &#123; wait(); &#125;  如果用if的时候，仅仅只判断一次，是不对的。因为当 wait() 返回时，有可能条件 已经发生变化了，曾经条件满足，但是现在已经不满足了，所以要重新检验条件是否满足。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 后续逻辑</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-join"><a href="#3-join" class="headerlink" title="3. join"></a>3. join</h3>
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/并发-面试/">并发 面试</a>
-                </div>
-            </div>
+            <p>等学完电子科技大学的课程和bobo老师@慕课网的教程之后，再来梳理 </p>
+
         </div>
         
         
@@ -253,62 +188,9 @@
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
-        <div class="buttons is-centered">
-            
-                
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
-
-<div class="notification is-danger">
-    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-        </div>
-    </div>
-</div>
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/11/更新日志的速度不亚于赵老六/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">试试这个title是做什么的</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/20/springboot-foo-01/">
-                <span class="level-item">springboot-foo(01)</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
 </div>
@@ -1010,7 +892,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="并发(01)" height="28">
+                    <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
                 
                 </a>
                 <p class="is-size-7">

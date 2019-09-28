@@ -148,6 +148,214 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-20T09:03:14.000Z">2019-05-20</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 915 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/20/并发-01/">并发(01)</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="操作系统层"><a href="#操作系统层" class="headerlink" title="操作系统层"></a>操作系统层</h1><h2 id="JVM的线程模型实现"><a href="#JVM的线程模型实现" class="headerlink" title="JVM的线程模型实现"></a>JVM的线程模型实现</h2><p>是用户态多个线程映射成了内核态的一个线程<br>这里就衍生出了IO密集型和计算密集型开多少线程的问题？<br>计算密集型 那就是1:1<br>IO密集型 …也不能太多，线程切换也是有性能损耗的</p>
+<h2 id="多线程编程的特点"><a href="#多线程编程的特点" class="headerlink" title="多线程编程的特点"></a>多线程编程的特点</h2><ul>
+<li><p>同一份代码，可以有多个线程执行</p>
+<ul>
+<li>既可以在一个CPU核上并发执行</li>
+<li>又可以在多个CPU核上并行执行</li>
+</ul>
+</li>
+<li><p>线程的执行默认是乱序的</p>
+<ul>
+<li>程序员不能假定执行次序</li>
+</ul>
+</li>
+<li><p>线程会共享数据</p>
+<ul>
+<li>需要互斥</li>
+</ul>
+</li>
+<li><p>线程之间也需要合作（比如我写完什么东西，你再去读）</p>
+<ul>
+<li>需要同步</li>
+</ul>
+</li>
+</ul>
+<p>？？？ 这里又有点乱，不过没关系，先研究互斥和同步！<br>多线程的BUG来源：原子性、可见性、有序性</p>
+<ul>
+<li>互斥</li>
+<li>同步</li>
+</ul>
+<h3 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h3><p>互斥怎么实现？其实这个概念在操作系统中已经研究得非常非常透彻了。互斥，本质上就是加锁。<br>面试题：</p>
+<ol>
+<li>如何实现互斥？<br> 答案：加锁！<ul>
+<li>只有获得了锁的线程，才能够对共享资源做操作，换句话说：进入临界区</li>
+<li>对共享资源做完操作（即使发生异常），一定要释放锁！</li>
+</ul>
+</li>
+<li>锁到底是个什么东西？<br> 需要保证原子性。最底层需要硬件指令的支持。需要锁住总线。</li>
+</ol>
+<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1><h2 id="设计锁的时候需要考虑的问题"><a href="#设计锁的时候需要考虑的问题" class="headerlink" title="设计锁的时候需要考虑的问题"></a>设计锁的时候需要考虑的问题</h2><ul>
+<li>线程申请锁的时候，发现已经被别的线程持有，该线程应该怎么办？<ul>
+<li>继续尝试，无限循环<ul>
+<li>然后每个线程基于被分配的时间片内跑，时间片用完了，ok，对不起，请退出CPU，变为就绪状态，进入就绪队列，等待下次系统调度。</li>
+<li>这种锁称为自旋锁<ul>
+<li>就是你的线程一直在尝试，一直尝试到你的时间片用光了，退出CPU，过一会又被调度了，又无限循环尝试。。。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>把线程放到阻塞队列中<ul>
+<li>既然你拿不到锁，那么请你进入阻塞队列。</li>
+<li>阻塞队列可能有很多线程都在等待，有一个线程离开了临界区，释放锁了，大家可以去抢这把锁了，此时操作系统会把队列中的线程，采用某种策略拿出来一个去执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="可重入性"><a href="#可重入性" class="headerlink" title="可重入性"></a>可重入性</h2><ul>
+<li>自旋锁无法重入</li>
+<li>解决办法<ul>
+<li>记录这个锁被谁持有</li>
+<li>记录重入的次数</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程之间的通信"><a href="#线程之间的通信" class="headerlink" title="线程之间的通信"></a>线程之间的通信</h2><h3 id="1-常用通过共享变量"><a href="#1-常用通过共享变量" class="headerlink" title="1. 常用通过共享变量"></a>1. 常用通过共享变量</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 共享变量</span></span><br><span class="line"><span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> loaded = <span class="hljs-keyword">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程A</span></span><br><span class="line">doSomething();</span><br><span class="line">loaded = <span class="hljs-keyword">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程B</span></span><br><span class="line"><span class="hljs-keyword">while</span>(!loaded) &#123;</span><br><span class="line">    <span class="hljs-comment">// doSomething</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-wait-notify"><a href="#2-wait-notify" class="headerlink" title="2. wait/notify"></a>2. wait/notify</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> loaded = <span class="hljs-keyword">false</span>;</span><br><span class="line">Object monitor = <span class="hljs-keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程A</span></span><br><span class="line">doSomething();</span><br><span class="line"><span class="hljs-keyword">synchronized</span>(monitor) &#123;</span><br><span class="line">    loaded = <span class="hljs-keyword">true</span>;</span><br><span class="line">    monitor.notify();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 线程B</span></span><br><span class="line"><span class="hljs-keyword">synchronized</span>(monitor) &#123;</span><br><span class="line">    <span class="hljs-keyword">while</span>(!loaded) &#123; </span><br><span class="line">        monitor.wait(); <span class="hljs-comment">// 进入阻塞队列，会释放锁,当别的线程调用monitor.notify() 的时候，只是被唤醒，并不能立即退出monitor.wait()的调用，而是还要去获取这把锁。while(条件不满足) &#123; wait(); &#125;  如果用if的时候，仅仅只判断一次，是不对的。因为当 wait() 返回时，有可能条件 已经发生变化了，曾经条件满足，但是现在已经不满足了，所以要重新检验条件是否满足。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 后续逻辑</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-join"><a href="#3-join" class="headerlink" title="3. join"></a>3. join</h3>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-20T02:43:32.000Z">2019-05-20</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1064 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/20/springboot-foo-01/">springboot-foo(01)</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="awesome-springboot"><a href="#awesome-springboot" class="headerlink" title="awesome-springboot"></a>awesome-springboot</h1><p>学习并总结一些基于业界大佬的编写范式和一些最佳实践</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>基于Maven的聚合工程</p>
+<h3 id="操作如下"><a href="#操作如下" class="headerlink" title="操作如下"></a>操作如下</h3><ul>
+<li>基本环境准备</li>
+</ul>
+<blockquote>
+<p>gradle也是如此,推荐自己手动按照规范建立项目,手动去编写.ignore文件</p>
+</blockquote>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># mac插件</span></span><br><span class="line"><span class="hljs-built_in">cd</span> <span class="hljs-string">'/Users/mizhe/learn/'</span>;</span><br><span class="line">mkdir awesome-springboot</span><br><span class="line"><span class="hljs-built_in">cd</span> awesome-springboot &amp;&amp; touch pom.xml</span><br><span class="line">mkdir -p src/main/java</span><br><span class="line">mkdir -p src/main/resources</span><br><span class="line">mkdir -p src/<span class="hljs-built_in">test</span>/java</span><br><span class="line"><span class="hljs-comment"># 用自己喜欢的文本编辑器打开并修改</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>maven的pom初始定义</li>
+</ul>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">	<span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>pom<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">	   </span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">	   <span class="hljs-comment">&lt;!--		&lt;finalName&gt;xxx&lt;/finalName&gt; --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.7.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">					<span class="hljs-tag">&lt;<span class="hljs-name">source</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">source</span>&gt;</span></span><br><span class="line">					<span class="hljs-tag">&lt;<span class="hljs-name">target</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span></span><br><span class="line">					<span class="hljs-tag">&lt;<span class="hljs-name">encoding</span>&gt;</span>UTF8<span class="hljs-tag">&lt;/<span class="hljs-name">encoding</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="新建一个awesome-spring-mybatis"><a href="#新建一个awesome-spring-mybatis" class="headerlink" title="新建一个awesome-spring-mybatis"></a>新建一个awesome-spring-mybatis</h2><blockquote>
+<p>环境搭建与上边类似,先学习在传统的spring工程中如何最佳的应用mybaties,等到迁移到springboot的时候,就自然会了.无非就是把xml改成配置bean的形式再结合springboot的autoconfig.</p>
+</blockquote>
+<h3 id="开始编写代码"><a href="#开始编写代码" class="headerlink" title="开始编写代码"></a>开始编写代码</h3><blockquote>
+<p>直接用idea open就可以</p>
+</blockquote>
+<p>项目的结构,后期提交到git的时候,手动去编写.gitignore文件</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">awesome-springboot</span><br><span class="line">    ├── pom.xml</span><br><span class="line">    └── src</span><br><span class="line">        ├── main</span><br><span class="line">        │   ├── java</span><br><span class="line">        │   └── resources</span><br><span class="line">        └── test</span><br><span class="line">            └── java</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>综述,这篇文章有一个问题,就是pom工程没必要去建立src目录,只是在此mark一下,后续自己的学习希望不要被这些环境搭建所困扰,一心直击技术要领!</p>
+</blockquote>
+<p>在此要感谢一下hexo的强大,我可以用mweb写完笔记之后,用hexo g 和 hexo d两个命令即可</p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>maven webapp 的目录结构</p>
+<blockquote>
+<p>servlet3x 规范以后再补充</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   ├── dao</span><br><span class="line">        │   ├── entity</span><br><span class="line">        │   └── service</span><br><span class="line">        ├── resources</span><br><span class="line">        │   ├── jdbc.properties</span><br><span class="line">        │   ├── mybatis-config.xml</span><br><span class="line">        │   └── spring</span><br><span class="line">        │       ├── spring-dao.xml</span><br><span class="line">        │       ├── spring-service.xml</span><br><span class="line">        │       └── spring-web.xml</span><br><span class="line">        └── webapp</span><br><span class="line">            ├── WEB-INF</span><br><span class="line">            │   └── web.xml</span><br><span class="line">            └── index.jsp</span><br></pre></td></tr></table></figure>
+<p>pom的定义</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.github.cookiespiggy<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-mybatis-demo<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>war<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.source</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.target</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">finalName</span>&gt;</span>spring-mybatis-demo<span class="hljs-tag">&lt;/<span class="hljs-name">finalName</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="hljs-tag">&lt;<span class="hljs-name">path</span>&gt;</span>/<span class="hljs-tag">&lt;/<span class="hljs-name">path</span>&gt;</span> <span class="hljs-comment">&lt;!--项目访问路径。当前配置的访问是localhost:9090/, 如果配置是/aa，则访问路径为localhost:9090/aa --&gt;</span></span><br><span class="line">                    <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>9090<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span></span><br><span class="line">                    <span class="hljs-tag">&lt;<span class="hljs-name">uriEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">uriEncoding</span>&gt;</span><span class="hljs-comment">&lt;!-- 非必需项 --&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="mysql-docker-环境搭建"><a href="#mysql-docker-环境搭建" class="headerlink" title="mysql docker 环境搭建"></a>mysql docker 环境搭建</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 带路径映射</span></span><br><span class="line">docker run --name mysql -d -p 3306:3306 -v ~/dockerdata/mysql:/var/lib/mysql -e MYSQL_DATABASE=mybatis -e MYSQL_USER=mybatis -e MYSQL_PASSWORD=mybatis -e MYSQL_ROOT_PASSWORD=root_password mysql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 不带路径映射</span></span><br><span class="line">docker run --name mysql -p 3306:3306  -e MYSQL_DATABASE=mybatis -e MYSQL_USER=mybatis -e MYSQL_PASSWORD=mybatis -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br><span class="line"></span><br><span class="line">docker <span class="hljs-built_in">exec</span> -it mysql bash</span><br><span class="line"><span class="hljs-comment"># 登录到mysql服务器中</span></span><br><span class="line">mysql -h localhost -u xxx -p </span><br><span class="line">show databases;</span><br><span class="line">use xxx;</span><br><span class="line">show tables;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># docker stop id/name 之后 再用 docker start id/name 启动</span></span><br></pre></td></tr></table></figure>
+<p>建议开发环境修改如下地方:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql -h localhost -u root -p</span><br><span class="line"></span><br><span class="line">use mysql;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 'root'@'%'所有服务器</span></span><br><span class="line"><span class="hljs-comment"># 'root'@'localhost' 本机</span></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'root'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'123456'</span>;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'mybatis'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'mybatis'</span>;</span><br><span class="line"></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br></pre></td></tr></table></figure>
+<p><strong>有了docker之后,使我的练习环境搭建变得如此的简单!</strong></p>
+<p>刚写博客,感觉排版很乱,所以还是应了Linus Torvalds那句老话:<br><strong>Talk is cheap ,show me the code</strong></p>
+<p>以后还得加强啊!</p>
+<p>共勉!</p>
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___&apos;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  &apos;  |____| .__|_| |_|_| |_\__, | / / / /</span><br><span class="line"> =========|_|==============|___/=/_/_/_/</span><br><span class="line"> :: Spring Boot ::        (v2.1.4.RELEASE)</span><br><span class="line"></span><br><span class="line">2019-05-12 21:05:52.806  INFO 8699 --- [           main] io.github.cp.App                         : Starting App on mizhe@Macpro with PID 8699 (/Users/mizhe/learn/awesome-springboot/springboot-mybatis-demo/target/classes started by mizhe in /Users/mizhe/learn/awesome-springboot)</span><br><span class="line">2019-05-12 21:05:52.809  INFO 8699 --- [           main] io.github.cp.App                         : No active profile set, falling back to default profiles: default</span><br><span class="line">2019-05-12 21:05:53.825  INFO 8699 --- [           main] io.github.cp.App                         : Started App in 1.585 seconds (JVM running for 2.345)</span><br><span class="line">class com.zaxxer.hikari.HikariDataSource</span><br><span class="line">2019-05-12 21:05:53.829  INFO 8699 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...</span><br><span class="line">2019-05-12 21:05:53.968  INFO 8699 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.</span><br><span class="line">class com.zaxxer.hikari.pool.HikariProxyConnection</span><br><span class="line">2019-05-12 21:05:53.980  INFO 8699 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...</span><br><span class="line">2019-05-12 21:05:53.986  INFO 8699 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">spring:</span></span><br><span class="line"><span class="hljs-attr">  datasource:</span></span><br><span class="line"><span class="hljs-attr">    url:</span> <span class="hljs-attr">jdbc:mysql://192.168.182.142:3306/mybatis?useSSL=false</span></span><br><span class="line"><span class="hljs-attr">    username:</span> <span class="hljs-string">mybatis</span></span><br><span class="line"><span class="hljs-attr">    password:</span> <span class="hljs-string">mybatis</span></span><br><span class="line">    <span class="hljs-comment"># driver-class-name: 可以自动推测出</span></span><br><span class="line">    <span class="hljs-comment"># private List&lt;String&gt; schema; List属性用 - -</span></span><br><span class="line"><span class="hljs-comment">#    schema:</span></span><br><span class="line"><span class="hljs-comment">#      - classpath:person.sql</span></span><br><span class="line"><span class="hljs-comment">#      - classpath:user.sql</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>数据源的相关配置在org.springframework.boot.autoconfigure.jdbc.DataSourceProperties </p>
+</blockquote>
+<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p>org.springframework.boot.autoconfigure.jdbc包下</p>
+<ul>
+<li>DataSourceConfiguration</li>
+<li>DataSourceBuilder</li>
+<li>DataSourceInitializerInvoker</li>
+<li>DataSourceInitializer</li>
+<li>JdbcTemplateAutoConfiguration</li>
+<li>DataSourceAutoConfiguration</li>
+</ul>
+<h2 id="整合druid数据源"><a href="#整合druid数据源" class="headerlink" title="整合druid数据源"></a>整合druid数据源</h2><h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><h2 id="补充内容（01）"><a href="#补充内容（01）" class="headerlink" title="补充内容（01）"></a>补充内容（01）</h2><p>idea中好用的插件</p>
+<ol>
+<li>lombok</li>
+<li>maven helper</li>
+<li>mybatis plugin （收费了）</li>
+<li>阿里巴巴s 用到了再一起总结</li>
+</ol>
+<h2 id="maven的配置"><a href="#maven的配置" class="headerlink" title="maven的配置"></a>maven的配置</h2><p>尽量把settings配置文件 放到.m2处 这样有利于开发工具的迁移</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-05-12T15:13:06.000Z">2019-05-12</time>
                 
                 
@@ -322,7 +530,7 @@
 <h2 id="帮助我们改进-MWeb"><a href="#帮助我们改进-MWeb" class="headerlink" title="帮助我们改进 MWeb"></a>帮助我们改进 MWeb</h2><p>如果你喜欢 MWeb，想让它变得更好，你可以：</p>
 <ol>
 <li>推荐 MWeb，让更多的人知道。</li>
-<li>给我们发反馈和建议：<a href="mailto:&#x63;&#x6f;&#x64;&#101;&#114;&#102;&#111;&#114;&#x61;&#114;&#116;&#43;&#x32;&#x33;&#51;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;" target="_blank" rel="noopener">&#x63;&#x6f;&#x64;&#101;&#114;&#102;&#111;&#114;&#x61;&#114;&#116;&#43;&#x32;&#x33;&#51;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a></li>
+<li>给我们发反馈和建议：<a href="mailto:&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#111;&#x72;&#97;&#114;&#x74;&#x2b;&#x32;&#51;&#51;&#51;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;" target="_blank" rel="noopener">&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#111;&#x72;&#97;&#114;&#x74;&#x2b;&#x32;&#51;&#51;&#51;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a></li>
 <li>在 Mac App Store 上评价 （如果是在 MAS 上购买的话）。</li>
 </ol>
 
@@ -394,10 +602,10 @@
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/">Anterior</a>
+            <a class="is-flex-grow has-text-black-ter" href="/">Previous</a>
         </div>
         <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Siguiente</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Next</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -449,17 +657,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Entradas
+                        Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        17
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categorias
+                        Categories
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -469,17 +677,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Etiquetas
+                        Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        11
+                        13
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/cookiespiggy" target="_blank">
-                SEGUIR</a>
+                Follow</a>
         </div>
         
         
@@ -571,7 +779,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categorias
+                Categories
             </h3>
             <ul class="menu-list">
             
@@ -584,9 +792,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Nube de etiquetas
+            Tag Cloud
         </h3>
-        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
+        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
     </div>
 </div>
 
@@ -598,8 +806,46 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/28/mm-0008-Java图形小工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java图形小工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-28T08:58:07.000Z">2019-09-28</time></div>
+                    <a href="/2019/09/28/mm-0008-Java图形小工具/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java图形小工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/27/mm-0007-排序算法之快排/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="排序算法之快排">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-27T10:13:17.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/mm-0007-排序算法之快排/" class="title has-link-black-ter is-size-6 has-text-weight-normal">排序算法之快排</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -658,44 +904,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/24/mm-0003-hexo更换主题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo更换主题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T08:43:09.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/mm-0003-hexo更换主题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo更换主题</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/24/mm-0002-linux下mysql的安装/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Linux下mysql的安装">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T07:33:12.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/mm-0002-linux下mysql的安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Linux下mysql的安装</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -704,7 +912,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -714,7 +922,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -739,7 +947,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -772,8 +980,22 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/java-awt-javax-swing/">
+                        <span class="tag">java awt javax swing</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/mysql8-0-mysql8/">
                         <span class="tag">mysql8.0 mysql8.+</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/quicksort/">
+                        <span class="tag">quicksort</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -840,8 +1062,46 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/28/mm-0008-Java图形小工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java图形小工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-28T08:58:07.000Z">2019-09-28</time></div>
+                    <a href="/2019/09/28/mm-0008-Java图形小工具/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java图形小工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/27/mm-0007-排序算法之快排/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="排序算法之快排">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-27T10:13:17.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/mm-0007-排序算法之快排/" class="title has-link-black-ter is-size-6 has-text-weight-normal">排序算法之快排</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -900,44 +1160,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/24/mm-0003-hexo更换主题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo更换主题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T08:43:09.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/mm-0003-hexo更换主题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo更换主题</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/24/mm-0002-linux下mysql的安装/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Linux下mysql的安装">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T07:33:12.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/mm-0002-linux下mysql的安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Linux下mysql的安装</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -946,7 +1168,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -956,7 +1178,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -981,7 +1203,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1014,8 +1236,22 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/java-awt-javax-swing/">
+                        <span class="tag">java awt javax swing</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/mysql8-0-mysql8/">
                         <span class="tag">mysql8.0 mysql8.+</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/quicksort/">
+                        <span class="tag">quicksort</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1246,10 +1482,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Entradas',
+                POSTS: 'Posts',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categorias',
-                TAGS: 'Etiquetas',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
