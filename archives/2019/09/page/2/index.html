@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Etiqueta: springboot mybatis maven 最佳实践 - 曲奇小猪的测试博客</title>
+<title>Archivos: 2019/9 - 曲奇小猪的测试博客</title>
 
 
     <meta name="description" content="天津理工大学(11级计算机系)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="曲奇小猪的测试博客">
-<meta property="og:url" content="http://yoursite.com/tags/springboot-mybatis-maven-最佳实践/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2019/09/page/2/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
 <meta property="og:description" content="天津理工大学(11级计算机系)">
 <meta property="og:locale" content="zh-Hans">
@@ -141,119 +141,54 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+
+<div class="card widget">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Etiquetas</a></li>
-            <li class="is-active"><a href="#" aria-current="page">springboot mybatis maven 最佳实践</a></li>
-        </ul>
-        </nav>
+        <h3 class="tag is-link">
+        September 2019
+        </h3>
+        <div class="timeline">
+        
+            <article class="media">
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-09-11T01:29:17.000Z">2019-09-11</time>
+                        <a href="/2019/09/11/更新日志的速度不亚于赵老六/" class="title has-link-black-ter is-size-6 has-text-weight-normal">试试这个title是做什么的</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
+        </div>
     </div>
 </div>
 
-    <div class="card">
+
+
     
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-20T02:43:32.000Z">2019-05-20</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 minutes read (About 1064 words)
-                </span>
-                
-                
-            </div>
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous">
+            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/09/">Anterior</a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/20/springboot-foo-01/">springboot-foo(01)</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="awesome-springboot"><a href="#awesome-springboot" class="headerlink" title="awesome-springboot"></a>awesome-springboot</h1><p>学习并总结一些基于业界大佬的编写范式和一些最佳实践</p>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>基于Maven的聚合工程</p>
-<h3 id="操作如下"><a href="#操作如下" class="headerlink" title="操作如下"></a>操作如下</h3><ul>
-<li>基本环境准备</li>
-</ul>
-<blockquote>
-<p>gradle也是如此,推荐自己手动按照规范建立项目,手动去编写.ignore文件</p>
-</blockquote>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># mac插件</span></span><br><span class="line"><span class="hljs-built_in">cd</span> <span class="hljs-string">'/Users/mizhe/learn/'</span>;</span><br><span class="line">mkdir awesome-springboot</span><br><span class="line"><span class="hljs-built_in">cd</span> awesome-springboot &amp;&amp; touch pom.xml</span><br><span class="line">mkdir -p src/main/java</span><br><span class="line">mkdir -p src/main/resources</span><br><span class="line">mkdir -p src/<span class="hljs-built_in">test</span>/java</span><br><span class="line"><span class="hljs-comment"># 用自己喜欢的文本编辑器打开并修改</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>maven的pom初始定义</li>
-</ul>
-<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">	<span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>pom<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">	   </span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">	   <span class="hljs-comment">&lt;!--		&lt;finalName&gt;xxx&lt;/finalName&gt; --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.7.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">					<span class="hljs-tag">&lt;<span class="hljs-name">source</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">source</span>&gt;</span></span><br><span class="line">					<span class="hljs-tag">&lt;<span class="hljs-name">target</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span></span><br><span class="line">					<span class="hljs-tag">&lt;<span class="hljs-name">encoding</span>&gt;</span>UTF8<span class="hljs-tag">&lt;/<span class="hljs-name">encoding</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="新建一个awesome-spring-mybatis"><a href="#新建一个awesome-spring-mybatis" class="headerlink" title="新建一个awesome-spring-mybatis"></a>新建一个awesome-spring-mybatis</h2><blockquote>
-<p>环境搭建与上边类似,先学习在传统的spring工程中如何最佳的应用mybaties,等到迁移到springboot的时候,就自然会了.无非就是把xml改成配置bean的形式再结合springboot的autoconfig.</p>
-</blockquote>
-<h3 id="开始编写代码"><a href="#开始编写代码" class="headerlink" title="开始编写代码"></a>开始编写代码</h3><blockquote>
-<p>直接用idea open就可以</p>
-</blockquote>
-<p>项目的结构,后期提交到git的时候,手动去编写.gitignore文件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">awesome-springboot</span><br><span class="line">    ├── pom.xml</span><br><span class="line">    └── src</span><br><span class="line">        ├── main</span><br><span class="line">        │   ├── java</span><br><span class="line">        │   └── resources</span><br><span class="line">        └── test</span><br><span class="line">            └── java</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>综述,这篇文章有一个问题,就是pom工程没必要去建立src目录,只是在此mark一下,后续自己的学习希望不要被这些环境搭建所困扰,一心直击技术要领!</p>
-</blockquote>
-<p>在此要感谢一下hexo的强大,我可以用mweb写完笔记之后,用hexo g 和 hexo d两个命令即可</p>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>maven webapp 的目录结构</p>
-<blockquote>
-<p>servlet3x 规范以后再补充</p>
-</blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   ├── dao</span><br><span class="line">        │   ├── entity</span><br><span class="line">        │   └── service</span><br><span class="line">        ├── resources</span><br><span class="line">        │   ├── jdbc.properties</span><br><span class="line">        │   ├── mybatis-config.xml</span><br><span class="line">        │   └── spring</span><br><span class="line">        │       ├── spring-dao.xml</span><br><span class="line">        │       ├── spring-service.xml</span><br><span class="line">        │       └── spring-web.xml</span><br><span class="line">        └── webapp</span><br><span class="line">            ├── WEB-INF</span><br><span class="line">            │   └── web.xml</span><br><span class="line">            └── index.jsp</span><br></pre></td></tr></table></figure>
-<p>pom的定义</p>
-<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.github.cookiespiggy<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-mybatis-demo<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>war<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.source</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.target</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">finalName</span>&gt;</span>spring-mybatis-demo<span class="hljs-tag">&lt;/<span class="hljs-name">finalName</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="hljs-tag">&lt;<span class="hljs-name">path</span>&gt;</span>/<span class="hljs-tag">&lt;/<span class="hljs-name">path</span>&gt;</span> <span class="hljs-comment">&lt;!--项目访问路径。当前配置的访问是localhost:9090/, 如果配置是/aa，则访问路径为localhost:9090/aa --&gt;</span></span><br><span class="line">                    <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>9090<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span></span><br><span class="line">                    <span class="hljs-tag">&lt;<span class="hljs-name">uriEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">uriEncoding</span>&gt;</span><span class="hljs-comment">&lt;!-- 非必需项 --&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="mysql-docker-环境搭建"><a href="#mysql-docker-环境搭建" class="headerlink" title="mysql docker 环境搭建"></a>mysql docker 环境搭建</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 带路径映射</span></span><br><span class="line">docker run --name mysql -d -p 3306:3306 -v ~/dockerdata/mysql:/var/lib/mysql -e MYSQL_DATABASE=mybatis -e MYSQL_USER=mybatis -e MYSQL_PASSWORD=mybatis -e MYSQL_ROOT_PASSWORD=root_password mysql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 不带路径映射</span></span><br><span class="line">docker run --name mysql -p 3306:3306  -e MYSQL_DATABASE=mybatis -e MYSQL_USER=mybatis -e MYSQL_PASSWORD=mybatis -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br><span class="line"></span><br><span class="line">docker <span class="hljs-built_in">exec</span> -it mysql bash</span><br><span class="line"><span class="hljs-comment"># 登录到mysql服务器中</span></span><br><span class="line">mysql -h localhost -u xxx -p </span><br><span class="line">show databases;</span><br><span class="line">use xxx;</span><br><span class="line">show tables;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># docker stop id/name 之后 再用 docker start id/name 启动</span></span><br></pre></td></tr></table></figure>
-<p>建议开发环境修改如下地方:</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql -h localhost -u root -p</span><br><span class="line"></span><br><span class="line">use mysql;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 'root'@'%'所有服务器</span></span><br><span class="line"><span class="hljs-comment"># 'root'@'localhost' 本机</span></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'root'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'123456'</span>;</span><br><span class="line"></span><br><span class="line">alter user <span class="hljs-string">'mybatis'</span>@<span class="hljs-string">'%'</span>  identified with mysql_native_password by <span class="hljs-string">'mybatis'</span>;</span><br><span class="line"></span><br><span class="line">select user,host,plugin,authentication_string from user;</span><br></pre></td></tr></table></figure>
-<p><strong>有了docker之后,使我的练习环境搭建变得如此的简单!</strong></p>
-<p>刚写博客,感觉排版很乱,所以还是应了Linus Torvalds那句老话:<br><strong>Talk is cheap ,show me the code</strong></p>
-<p>以后还得加强啊!</p>
-<p>共勉!</p>
-<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___&apos;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  &apos;  |____| .__|_| |_|_| |_\__, | / / / /</span><br><span class="line"> =========|_|==============|___/=/_/_/_/</span><br><span class="line"> :: Spring Boot ::        (v2.1.4.RELEASE)</span><br><span class="line"></span><br><span class="line">2019-05-12 21:05:52.806  INFO 8699 --- [           main] io.github.cp.App                         : Starting App on mizhe@Macpro with PID 8699 (/Users/mizhe/learn/awesome-springboot/springboot-mybatis-demo/target/classes started by mizhe in /Users/mizhe/learn/awesome-springboot)</span><br><span class="line">2019-05-12 21:05:52.809  INFO 8699 --- [           main] io.github.cp.App                         : No active profile set, falling back to default profiles: default</span><br><span class="line">2019-05-12 21:05:53.825  INFO 8699 --- [           main] io.github.cp.App                         : Started App in 1.585 seconds (JVM running for 2.345)</span><br><span class="line">class com.zaxxer.hikari.HikariDataSource</span><br><span class="line">2019-05-12 21:05:53.829  INFO 8699 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...</span><br><span class="line">2019-05-12 21:05:53.968  INFO 8699 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.</span><br><span class="line">class com.zaxxer.hikari.pool.HikariProxyConnection</span><br><span class="line">2019-05-12 21:05:53.980  INFO 8699 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...</span><br><span class="line">2019-05-12 21:05:53.986  INFO 8699 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.</span><br></pre></td></tr></table></figure>
-<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">spring:</span></span><br><span class="line"><span class="hljs-attr">  datasource:</span></span><br><span class="line"><span class="hljs-attr">    url:</span> <span class="hljs-attr">jdbc:mysql://192.168.182.142:3306/mybatis?useSSL=false</span></span><br><span class="line"><span class="hljs-attr">    username:</span> <span class="hljs-string">mybatis</span></span><br><span class="line"><span class="hljs-attr">    password:</span> <span class="hljs-string">mybatis</span></span><br><span class="line">    <span class="hljs-comment"># driver-class-name: 可以自动推测出</span></span><br><span class="line">    <span class="hljs-comment"># private List&lt;String&gt; schema; List属性用 - -</span></span><br><span class="line"><span class="hljs-comment">#    schema:</span></span><br><span class="line"><span class="hljs-comment">#      - classpath:person.sql</span></span><br><span class="line"><span class="hljs-comment">#      - classpath:user.sql</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>数据源的相关配置在org.springframework.boot.autoconfigure.jdbc.DataSourceProperties </p>
-</blockquote>
-<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p>org.springframework.boot.autoconfigure.jdbc包下</p>
-<ul>
-<li>DataSourceConfiguration</li>
-<li>DataSourceBuilder</li>
-<li>DataSourceInitializerInvoker</li>
-<li>DataSourceInitializer</li>
-<li>JdbcTemplateAutoConfiguration</li>
-<li>DataSourceAutoConfiguration</li>
-</ul>
-<h2 id="整合druid数据源"><a href="#整合druid数据源" class="headerlink" title="整合druid数据源"></a>整合druid数据源</h2><h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><h2 id="补充内容（01）"><a href="#补充内容（01）" class="headerlink" title="补充内容（01）"></a>补充内容（01）</h2><p>idea中好用的插件</p>
-<ol>
-<li>lombok</li>
-<li>maven helper</li>
-<li>mybatis plugin （收费了）</li>
-<li>阿里巴巴s 用到了再一起总结</li>
-</ol>
-<h2 id="maven的配置"><a href="#maven的配置" class="headerlink" title="maven的配置"></a>maven的配置</h2><p>尽量把settings配置文件 放到.m2处 这样有利于开发工具的迁移</p>
-
+        <div class="pagination-next is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/09/page/3/">Siguiente</a>
         </div>
-        
-        
-        
-    </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link has-text-black-ter" href="/archives/2019/09/">1</a></li>
+            
+            <li><a class="pagination-link is-current" href="/archives/2019/09/page/2/">2</a></li>
+            
+        </ul>
+    </nav>
 </div>
-
-
-
-
-
-
-
-
 </div>
                 
 
