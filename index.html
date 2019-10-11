@@ -148,6 +148,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-11T01:45:08.000Z">2019-10-11</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 77 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/11/mm-0011-hadoop/">mm_0011_hadoop</a>
+            
+        </h1>
+        <div class="content">
+            <p>之前用的mk工具为mweb，现在用typora，试试效果</p>
+<h1 id="HDFS模块"><a href="#HDFS模块" class="headerlink" title="HDFS模块"></a>HDFS模块</h1><blockquote>
+<p>hdfs模块概述：</p>
+<p>分布式存储的两个特点：</p>
+<ul>
+<li><p>数据分节点存放</p>
+</li>
+<li><p>备份容灾</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="与hdfs相关的五大配置文件"><a href="#与hdfs相关的五大配置文件" class="headerlink" title="与hdfs相关的五大配置文件"></a>与hdfs相关的五大配置文件</h3><h4 id="hadoop-env-sh"><a href="#hadoop-env-sh" class="headerlink" title="hadoop-env.sh"></a>hadoop-env.sh</h4><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="一些常用命令"><a href="#一些常用命令" class="headerlink" title="一些常用命令"></a>一些常用命令</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="再谈hdfs"><a href="#再谈hdfs" class="headerlink" title="再谈hdfs"></a>再谈hdfs</h2>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-09-30T05:28:25.000Z">2019-09-30</time>
                 
                 
@@ -195,7 +248,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 48 words)
+                    a few seconds read (About 87 words)
                 </span>
                 
                 
@@ -213,8 +266,8 @@
 <blockquote>
 <p>使用Java API操作HDFS文件系统<br>关键点：<br>1) 创建Configuration<br>2) 获取FileSystem<br>3) HDFS API的操作</p>
 </blockquote>
-<pre><code class="java">
-</code></pre>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p><a href="https://help.aliyun.com/document_detail/134127.html#title-bg4-zdk-kg7" target="_blank" rel="noopener">https://help.aliyun.com/document_detail/134127.html#title-bg4-zdk-kg7</a></p>
+<p>HDFS的性能测试，根据参数动态调整，才能算出bufferSize多大才合适。</p>
 
         </div>
         
@@ -553,48 +606,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-24T07:19:19.000Z">2019-09-24</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 124 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/24/mm-0001-SSM配置/">SSM配置</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1、Mybatis的配置"><a href="#1、Mybatis的配置" class="headerlink" title="1、Mybatis的配置"></a>1、Mybatis的配置</h1><p>sqlMapConfig.xml<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="hljs-meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="hljs-meta">  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="hljs-meta">  "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">	<span class="hljs-comment">&lt;!-- 配置全局属性 --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"useGeneratedKeys"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 使用列别名替换列名 默认:true --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"useColumnLabel"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 开启驼峰命名转换:Table&#123;create_time&#125; -&gt; Entity&#123;createTime&#125; --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"mapUnderscoreToCamelCase"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 打印查询语句 --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"logImpl"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"STDOUT_LOGGING"</span> /&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>sql语句为<br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`t_account`</span> (</span><br><span class="line">  <span class="hljs-string">`id`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">5</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="hljs-string">`name`</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">200</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-string">`money`</span> <span class="hljs-built_in">float</span>(<span class="hljs-number">5</span>,<span class="hljs-number">2</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span>, <span class="hljs-comment"># https://www.cnblogs.com/shamo89/p/8202837.html</span></span><br><span class="line">  PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>),</span><br><span class="line">  <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">KEY</span> <span class="hljs-string">`UK_NAME`</span> (<span class="hljs-string">`name`</span>)</span><br><span class="line">) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> AUTO_INCREMENT=<span class="hljs-number">7</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -658,7 +669,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        19
+                        20
                     </p>
                 </div>
             </div>
@@ -678,7 +689,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        16
+                        17
                     </p>
                 </div>
             </div>
@@ -792,7 +803,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 10px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
+        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
     </div>
 </div>
 
@@ -806,6 +817,25 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/mm-0011-hadoop/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mm_0011_hadoop">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T01:45:08.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/mm-0011-hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mm_0011_hadoop</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -883,25 +913,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/26/mm-0006-手写线程池/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="手写线程池">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T07:35:28.000Z">2019-09-26</time></div>
-                    <a href="/2019/09/26/mm-0006-手写线程池/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手写线程池</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -913,6 +924,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/09/">
@@ -973,14 +995,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hadoop/">
                         <span class="tag">hadoop</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hdfs/">
                         <span class="tag">hdfs</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1029,6 +1051,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/xcall-ssh/">
                         <span class="tag">xcall ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/大数据Java组件/">
+                        <span class="tag">大数据Java组件</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1086,6 +1115,25 @@
         
         <article class="media">
             
+            <a href="/2019/10/11/mm-0011-hadoop/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mm_0011_hadoop">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T01:45:08.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/mm-0011-hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mm_0011_hadoop</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/09/30/mm-0010-杂记/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="杂记">
@@ -1160,25 +1208,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/26/mm-0006-手写线程池/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="手写线程池">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T07:35:28.000Z">2019-09-26</time></div>
-                    <a href="/2019/09/26/mm-0006-手写线程池/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手写线程池</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1190,6 +1219,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/09/">
@@ -1250,14 +1290,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hadoop/">
                         <span class="tag">hadoop</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hdfs/">
                         <span class="tag">hdfs</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1306,6 +1346,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/xcall-ssh/">
                         <span class="tag">xcall ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/大数据Java组件/">
+                        <span class="tag">大数据Java组件</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
