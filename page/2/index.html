@@ -148,6 +148,89 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-24T08:43:09.000Z">2019-09-24</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 75 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/09/24/mm-0003-hexo更换主题/">hexo更换主题</a>
+            
+        </h1>
+        <div class="content">
+            <p>更换hexo的主题<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">1 Go to your blog<span class="hljs-string">'s root folder and clone Icarus into themes/icarus:</span></span></span><br><span class="line">git clone https://github.com/ppoffice/hexo-theme-icarus.git themes/icarus</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">2 Edit your blog<span class="hljs-string">'s _config.yml, change the theme field to icarus to enable this theme:</span></span></span><br><span class="line">theme: icarus</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">3 <span class="hljs-built_in">cd</span> themes/icarus &amp;&amp; git pull</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">4 hexo server --debug (hexo clean)</span></span><br></pre></td></tr></table></figure></p>
+<p>google 搜索 icarus 配置 前几篇文章都蛮好的</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-24T07:33:12.000Z">2019-09-24</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 205 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/09/24/mm-0002-linux下mysql的安装/">Linux下mysql的安装</a>
+            
+        </h1>
+        <div class="content">
+            <p>Linux下安装mysql，暂时只支持外网安装。内网安装教程以后继续更新…<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Linux四种安装软件的方式以及安装mysql-server </span><br><span class="line">https://www.cnblogs.com/yowamushi/p/8043054.html</span><br><span class="line">安装完成之后</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">1 service mysqld start</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">2 mysql</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">3 show databases;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">4 use mysql;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">5 show tables;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">6 desc user;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">7 select host,user,password from user; // host运行哪些节点来访问，默认只允许本机进行访问，不要update这个表，要通过授权！</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">8 grant all privileges on *.* to <span class="hljs-string">'root'</span>@<span class="hljs-string">'%'</span>identified by <span class="hljs-string">'123'</span> with grant option; // 授予所有权限 所有库的所有表 %所有地址</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">9 delete from user <span class="hljs-built_in">where</span> host != <span class="hljs-string">'%'</span>;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">10 select host,user,password from user;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">11 flush privileges;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">12 quit</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">12 mysql -uroot -p  //Server version: 5.6.45 MySQL Community Server (GPL) 查看版本</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">13 123</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">14 show databases;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">15 quit</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">16 ps -ef | grep mysqld</span></span><br><span class="line">=======开发=======</span><br><span class="line">mysql-connector-java与mysql版本的对应</span><br><span class="line">https://www.cnblogs.com/junzi/p/6893122.html</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">1 CREATE DATABASE mydatabase CHARACTER SET utf8 COLLATE utf8_general_ci;</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">2 show databases;</span></span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-09-24T07:19:19.000Z">2019-09-24</time>
                 
                 
@@ -606,130 +689,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-08T08:58:14.000Z">2019-05-08</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 689 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/08/usemweb/">usemweb</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="欢迎使用-MWeb"><a href="#欢迎使用-MWeb" class="headerlink" title="欢迎使用 MWeb"></a>欢迎使用 MWeb</h1><p>MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件，目前已支持 Mac，iPad 和 iPhone。MWeb 有以下特色：</p>
-<h2 id="软件本身："><a href="#软件本身：" class="headerlink" title="软件本身："></a>软件本身：</h2><ul>
-<li>使用原生的 macOS 技术打造，追求与系统的完美结合。</li>
-<li>原则上，首先是追求界面简洁和高性能，然后才是强大易用，功能全面。</li>
-</ul>
-<h2 id="Markdown-语法："><a href="#Markdown-语法：" class="headerlink" title="Markdown 语法："></a>Markdown 语法：</h2><ul>
-<li>使用 Github Flavored Markdown 语法，简称 GFM 语法。</li>
-<li>支持表格、TOC、LaTeX、代码块、任务列表、脚注等。</li>
-<li>画图库支持 mermaid, viz, echarts, plantuml, sequence, flow。</li>
-</ul>
-<h2 id="Markdown-辅助："><a href="#Markdown-辅助：" class="headerlink" title="Markdown 辅助："></a>Markdown 辅助：</h2><ul>
-<li>支持截图并粘贴、复制并粘贴、拖拽等方式插入图片并直接显示在编辑器内。</li>
-<li>在兼容 Markdown 语法的情况下支持设置图片宽度。</li>
-<li>好用的表格插入和 LaTeX 书写辅助。</li>
-</ul>
-<h2 id="Markdown-输出："><a href="#Markdown-输出：" class="headerlink" title="Markdown 输出："></a>Markdown 输出：</h2><ul>
-<li>支持导出为图片、HTML、Epub、PDF、RTF、Docx。</li>
-<li>支持发布到 Wordrpess、支持 Metaweblog API 协议的服务、Wordpress.com、印象笔记（Evernote）、Blogger、Medium、Tumblr。</li>
-<li>图片上传服务（图床）支持 Google Photos、Imgur、七牛云、又拍云和自定义的图床服务。</li>
-</ul>
-<h2 id="Markdown-笔记："><a href="#Markdown-笔记：" class="headerlink" title="Markdown 笔记："></a>Markdown 笔记：</h2><ul>
-<li>强大的文档库支持分类树和标签管理文档，文档可归类于多个分类，可以把分类整个导出为 Epub、PDF 和生成静态网站。非常合适用于笔记、个人知识收集、管理和输出。</li>
-<li>快速笔记：随意增加笔记及图片等素材，支持以天为单位把增加的素材组合在一个文档内，方便整理及记录历史收集情况。</li>
-<li>快速搜索：目前已支持全局快捷键调出搜索。</li>
-</ul>
-<h2 id="外部-Markdown-文档："><a href="#外部-Markdown-文档：" class="headerlink" title="外部 Markdown 文档："></a>外部 Markdown 文档：</h2><ul>
-<li>外部 Markdown 文档使用外部模式管理。外部模式使用目录树的方式编辑和管理你的 markdown 文档，还能很好的支持 gitbook、JekyII、hexo 等等编辑和图片插入。</li>
-</ul>
-<h2 id="MWeb-文档："><a href="#MWeb-文档：" class="headerlink" title="MWeb 文档："></a>MWeb 文档：</h2><p>如果要更详细了解 MWeb，建议你一定要去看一下官网的帮助文档，网址为：<a href="https://zh.mweb.im/help.html" target="_blank" rel="noopener">https://zh.mweb.im/help.html</a>。我们建议在使用文档库之前，一定要阅读一下  <a href="https://zh.mweb.im/mweb-library.html" target="_blank" rel="noopener">MWeb 文档库详细介绍</a> 这篇文章，以便更好的使用文档库。</p>
-<h2 id="帮助我们改进-MWeb"><a href="#帮助我们改进-MWeb" class="headerlink" title="帮助我们改进 MWeb"></a>帮助我们改进 MWeb</h2><p>如果你喜欢 MWeb，想让它变得更好，你可以：</p>
-<ol>
-<li>推荐 MWeb，让更多的人知道。</li>
-<li>给我们发反馈和建议：<a href="mailto:&#99;&#111;&#100;&#x65;&#114;&#x66;&#x6f;&#x72;&#x61;&#x72;&#x74;&#43;&#50;&#x33;&#51;&#51;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;" target="_blank" rel="noopener">&#99;&#111;&#100;&#x65;&#114;&#x66;&#x6f;&#x72;&#x61;&#x72;&#x74;&#43;&#50;&#x33;&#51;&#51;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a></li>
-<li>在 Mac App Store 上评价 （如果是在 MAS 上购买的话）。</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-08T08:34:29.000Z">2019-05-08</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 121 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/08/hello-world/">Hello World</a>
-            
-        </h1>
-        <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -737,7 +696,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/">Previous</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/3/">Next</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -745,6 +704,8 @@
             <li><a class="pagination-link has-text-black-ter" href="/">1</a></li>
             
             <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
             
         </ul>
     </nav>
@@ -793,7 +754,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        20
+                        22
                     </p>
                 </div>
             </div>
@@ -813,7 +774,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        17
+                        22
                     </p>
                 </div>
             </div>
@@ -927,7 +888,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
+        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/spark/" style="font-size: 10px;">spark</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式协调服务/" style="font-size: 10px;">分布式协调服务</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/实时流数据处理/" style="font-size: 10px;">实时流数据处理</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/批-微批处理/" style="font-size: 10px;">批/微批处理</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
     </div>
 </div>
 
@@ -944,16 +905,54 @@
         
         <article class="media">
             
+            <a href="/2019/10/13/mm-0013-zookeeper应用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="zookeeper">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-13T02:11:39.000Z">2019-10-13</time></div>
+                    <a href="/2019/10/13/mm-0013-zookeeper应用/" class="title has-link-black-ter is-size-6 has-text-weight-normal">zookeeper</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/mm-0012-spark/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T02:14:49.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/mm-0012-spark/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/10/11/mm-0011-hadoop/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mm_0011_hadoop">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hadoop">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T01:45:08.000Z">2019-10-11</time></div>
-                    <a href="/2019/10/11/mm-0011-hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mm_0011_hadoop</a>
+                    <a href="/2019/10/11/mm-0011-hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hadoop</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -999,44 +998,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/28/mm-0008-Java图形小工具/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java图形小工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-28T08:58:07.000Z">2019-09-28</time></div>
-                    <a href="/2019/09/28/mm-0008-Java图形小工具/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java图形小工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/27/mm-0007-排序算法之快排/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="排序算法之快排">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-27T10:13:17.000Z">2019-09-27</time></div>
-                    <a href="/2019/09/27/mm-0007-排序算法之快排/" class="title has-link-black-ter is-size-6 has-text-weight-normal">排序算法之快排</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1055,7 +1016,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1159,6 +1120,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/spark/">
+                        <span class="tag">spark</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/springboot-mybatis-maven-最佳实践/">
                         <span class="tag">springboot mybatis maven 最佳实践</span>
                         <span class="tag is-grey">1</span>
@@ -1180,6 +1148,20 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式协调服务/">
+                        <span class="tag">分布式协调服务</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/大数据Java组件/">
                         <span class="tag">大数据Java组件</span>
                         <span class="tag is-grey">1</span>
@@ -1194,8 +1176,22 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/实时流数据处理/">
+                        <span class="tag">实时流数据处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/并发-面试/">
                         <span class="tag">并发 面试</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/批-微批处理/">
+                        <span class="tag">批/微批处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1239,16 +1235,54 @@
         
         <article class="media">
             
+            <a href="/2019/10/13/mm-0013-zookeeper应用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="zookeeper">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-13T02:11:39.000Z">2019-10-13</time></div>
+                    <a href="/2019/10/13/mm-0013-zookeeper应用/" class="title has-link-black-ter is-size-6 has-text-weight-normal">zookeeper</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/mm-0012-spark/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T02:14:49.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/mm-0012-spark/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/10/11/mm-0011-hadoop/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mm_0011_hadoop">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hadoop">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T01:45:08.000Z">2019-10-11</time></div>
-                    <a href="/2019/10/11/mm-0011-hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mm_0011_hadoop</a>
+                    <a href="/2019/10/11/mm-0011-hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hadoop</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1294,44 +1328,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/28/mm-0008-Java图形小工具/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java图形小工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-28T08:58:07.000Z">2019-09-28</time></div>
-                    <a href="/2019/09/28/mm-0008-Java图形小工具/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java图形小工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/27/mm-0007-排序算法之快排/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="排序算法之快排">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-27T10:13:17.000Z">2019-09-27</time></div>
-                    <a href="/2019/09/27/mm-0007-排序算法之快排/" class="title has-link-black-ter is-size-6 has-text-weight-normal">排序算法之快排</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1350,7 +1346,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1454,6 +1450,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/spark/">
+                        <span class="tag">spark</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/springboot-mybatis-maven-最佳实践/">
                         <span class="tag">springboot mybatis maven 最佳实践</span>
                         <span class="tag is-grey">1</span>
@@ -1475,6 +1478,20 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式协调服务/">
+                        <span class="tag">分布式协调服务</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/大数据Java组件/">
                         <span class="tag">大数据Java组件</span>
                         <span class="tag is-grey">1</span>
@@ -1489,8 +1506,22 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/实时流数据处理/">
+                        <span class="tag">实时流数据处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/并发-面试/">
                         <span class="tag">并发 面试</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/批-微批处理/">
+                        <span class="tag">批/微批处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
