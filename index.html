@@ -148,13 +148,58 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-15T15:37:45.000Z">2019-10-15</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 253 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/15/mm-0015-mysql/">mm_0015_mysql</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="mysql离线安装"><a href="#mysql离线安装" class="headerlink" title="mysql离线安装"></a>mysql离线安装</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 定制安装 https://github.com/Hackeruncle/MySQL</span></span><br><span class="line">yum install wget</span><br><span class="line">wget http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.11-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">mkdir /root/soft</span><br><span class="line">rz mysql-5.6.23-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">tar -zxvf mysql-5.6.23-linux-glibc2.5-x86_64.tar.gz -C /usr/local</span><br><span class="line">cd /usr/local/</span><br><span class="line">mv mysql-5.6.23-linux-glibc2.5-x86_64 mysql</span><br><span class="line">mkdir mysql/arch mysql/data mysql/tmp</span><br><span class="line">vi /etc/my.cnf # 默认存在的</span><br><span class="line">dG i # 添加mysql配置</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 此命令向系统中增加了一个新组dba，同时指定新组的组标识号是101</span></span><br><span class="line">groupadd -g 101 dba</span><br><span class="line">useradd -u 514 -g dba -G root -d /usr/local/mysql mysqladmin</span><br><span class="line">cp /etc/skel/.* /usr/local/mysql #解决su - mysqladmin 丢失bash问题</span><br><span class="line">vi mysql/.bash_profile </span><br><span class="line">chown  mysqladmin:dba /etc/my.cnf </span><br><span class="line">chmod  640 /etc/my.cnf</span><br><span class="line">chown -R mysqladmin:dba /usr/local/mysql</span><br><span class="line">chmod -R 755 /usr/local/mysql </span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 开机自启</span></span><br><span class="line">cd /usr/local/mysql</span><br><span class="line">cp support-files/mysql.server /etc/rc.d/init.d/mysql</span><br><span class="line">chmod +x /etc/rc.d/init.d/mysql</span><br><span class="line">chkconfig --del mysql</span><br><span class="line">chkconfig --add mysql</span><br><span class="line">chkconfig --level 345 mysql on</span><br><span class="line">chkconfig --list</span><br><span class="line"></span><br><span class="line">yum -y install libaio</span><br><span class="line">su - mysqladmin</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 启动</span></span><br><span class="line">bin/mysqld \</span><br><span class="line">--defaults-file=/etc/my.cnf \</span><br><span class="line">--user=mysqladmin \</span><br><span class="line">--basedir=/usr/local/mysql/ \</span><br><span class="line">--datadir=/usr/local/mysql/data/ \</span><br><span class="line">--initialize</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 无报错就是成功</span></span><br><span class="line">cd data/</span><br><span class="line">ll</span><br><span class="line">cat hostname.err | grep password （=dr&lt;s)D5tBnO）</span><br><span class="line">/usr/local/mysql/bin/mysqld_safe --defaults-file=/etc/my.cnf &amp;</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"><span class="hljs-comment"># 注意两次回车</span></span></span><br><span class="line">ps -ef | grep mysql</span><br><span class="line">exit</span><br><span class="line">netstat -nlp | grep pid</span><br><span class="line">su - mysqladmin</span><br><span class="line">service mysql status # centos6的口令在7上也是可以跑的</span><br><span class="line">service mysql restart</span><br><span class="line">mysql -uroot -p'=dr&lt;s)D5tBnO'</span><br><span class="line"></span><br><span class="line">alter user root@localhost identified by 'qwe123';</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'qwe123';</span><br><span class="line">flush privileges;</span><br><span class="line">exit;</span><br><span class="line">mysql -uroot -pqwe123</span><br><span class="line">ps -ef | grep mysql</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 退出mysqladmin用户，切换到root用户</span></span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<p>/etc/my.cnf</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /usr/local/mysql/data/mysql.sock</span><br><span class="line">default-character-set=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /usr/local/mysql/data/mysql.sock</span><br><span class="line"></span><br><span class="line">skip-slave-start</span><br><span class="line"></span><br><span class="line">skip-external-locking</span><br><span class="line">key_buffer_size = 256M</span><br><span class="line">sort_buffer_size = 2M</span><br><span class="line">read_buffer_size = 2M</span><br><span class="line">read_rnd_buffer_size = 4M</span><br><span class="line">query_cache_size= 32M</span><br><span class="line">max_allowed_packet = 16M</span><br><span class="line">myisam_sort_buffer_size=128M</span><br><span class="line">tmp_table_size=32M</span><br><span class="line"></span><br><span class="line">table_open_cache = 512</span><br><span class="line">thread_cache_size = 8</span><br><span class="line">wait_timeout = 86400</span><br><span class="line">interactive_timeout = 86400</span><br><span class="line">max_connections = 600</span><br><span class="line"></span><br><span class="line"># Try number of CPU&apos;s*2 for thread_concurrency</span><br><span class="line">#thread_concurrency = 32 </span><br><span class="line"></span><br><span class="line">#isolation level and default engine </span><br><span class="line">default-storage-engine = INNODB</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br><span class="line"></span><br><span class="line">server-id  = 1739</span><br><span class="line">basedir     = /usr/local/mysql</span><br><span class="line">datadir     = /usr/local/mysql/data</span><br><span class="line">pid-file     = /usr/local/mysql/data/hostname.pid</span><br><span class="line"></span><br><span class="line">#open performance schema</span><br><span class="line">log-warnings</span><br><span class="line">sysdate-is-now</span><br><span class="line"></span><br><span class="line">binlog_format = ROW</span><br><span class="line">log_bin_trust_function_creators=1</span><br><span class="line">log-error  = /usr/local/mysql/data/hostname.err</span><br><span class="line">log-bin = /usr/local/mysql/arch/mysql-bin</span><br><span class="line">expire_logs_days = 7</span><br><span class="line"></span><br><span class="line">innodb_write_io_threads=16</span><br><span class="line"></span><br><span class="line">relay-log  = /usr/local/mysql/relay_log/relay-log</span><br><span class="line">relay-log-index = /usr/local/mysql/relay_log/relay-log.index</span><br><span class="line">relay_log_info_file= /usr/local/mysql/relay_log/relay-log.info</span><br><span class="line"></span><br><span class="line">log_slave_updates=1</span><br><span class="line">gtid_mode=OFF</span><br><span class="line">enforce_gtid_consistency=OFF</span><br><span class="line"></span><br><span class="line"># slave</span><br><span class="line">slave-parallel-type=LOGICAL_CLOCK</span><br><span class="line">slave-parallel-workers=4</span><br><span class="line">master_info_repository=TABLE</span><br><span class="line">relay_log_info_repository=TABLE</span><br><span class="line">relay_log_recovery=ON</span><br><span class="line"></span><br><span class="line">#other logs</span><br><span class="line">#general_log =1</span><br><span class="line">#general_log_file  = /usr/local/mysql/data/general_log.err</span><br><span class="line">#slow_query_log=1</span><br><span class="line">#slow_query_log_file=/usr/local/mysql/data/slow_log.err</span><br><span class="line"></span><br><span class="line">#for replication slave</span><br><span class="line">sync_binlog = 500</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#for innodb options </span><br><span class="line">innodb_data_home_dir = /usr/local/mysql/data/</span><br><span class="line">innodb_data_file_path = ibdata1:1G;ibdata2:1G:autoextend</span><br><span class="line"></span><br><span class="line">innodb_log_group_home_dir = /usr/local/mysql/arch</span><br><span class="line">innodb_log_files_in_group = 4</span><br><span class="line">innodb_log_file_size = 1G</span><br><span class="line">innodb_log_buffer_size = 200M</span><br><span class="line"></span><br><span class="line">#根据生产需要，调整pool size </span><br><span class="line">innodb_buffer_pool_size = 2G</span><br><span class="line">#innodb_additional_mem_pool_size = 50M #deprecated in 5.6</span><br><span class="line">tmpdir = /usr/local/mysql/tmp</span><br><span class="line"></span><br><span class="line">innodb_lock_wait_timeout = 1000</span><br><span class="line">#innodb_thread_concurrency = 0</span><br><span class="line">innodb_flush_log_at_trx_commit = 2</span><br><span class="line"></span><br><span class="line">innodb_locks_unsafe_for_binlog=1</span><br><span class="line"></span><br><span class="line">#innodb io features: add for mysql5.5.8</span><br><span class="line">performance_schema</span><br><span class="line">innodb_read_io_threads=4</span><br><span class="line">innodb-write-io-threads=4</span><br><span class="line">innodb-io-capacity=200</span><br><span class="line">#purge threads change default(0) to 1 for purge</span><br><span class="line">innodb_purge_threads=1</span><br><span class="line">innodb_use_native_aio=on</span><br><span class="line"></span><br><span class="line">#case-sensitive file names and separate tablespace</span><br><span class="line">innodb_file_per_table = 1</span><br><span class="line">lower_case_table_names=1</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line">quick</span><br><span class="line">max_allowed_packet = 128M</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">no-auto-rehash</span><br><span class="line">default-character-set=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysqlhotcopy]</span><br><span class="line">interactive-timeout</span><br><span class="line"></span><br><span class="line">[myisamchk]</span><br><span class="line">key_buffer_size = 256M</span><br><span class="line">sort_buffer_size = 256M</span><br><span class="line">read_buffer = 2M</span><br><span class="line">write_buffer = 2M</span><br></pre></td></tr></table></figure>
+<p>mysql/.bash_profile </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># .bash_profile</span><br><span class="line"></span><br><span class="line"># Get the aliases and functions</span><br><span class="line">if [ -f ~/.bashrc ]; then</span><br><span class="line">        . ~/.bashrc</span><br><span class="line">fi</span><br><span class="line"># User specific environment and startup programs</span><br><span class="line">export MYSQL_BASE=/usr/local/mysql</span><br><span class="line">export PATH=$&#123;MYSQL_BASE&#125;/bin:$PATH</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">unset USERNAME</span><br><span class="line"></span><br><span class="line">#stty erase ^H</span><br><span class="line">set umask to 022</span><br><span class="line">umask 022</span><br><span class="line">PS1=`uname -n`&quot;:&quot;&apos;$USER&apos;&quot;:&quot;&apos;$PWD&apos;&quot;:&gt;&quot;; export PS1</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-10-14T09:20:04.000Z">2019-10-14</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 930 words)
+                    5 minutes read (About 808 words)
                 </span>
                 
                 
@@ -195,20 +240,15 @@
 <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">date</span><br><span class="line">crontab -e</span><br><span class="line">i</span><br><span class="line">00 00 * * * /usr/sbin/ntpdate hadoop001 # 每天0点同步一次</span><br></pre></td></tr></table></figure>
 <p>jdk</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/java</span><br><span class="line">tar -zxvf jdk.tg -C /usr/java</span><br></pre></td></tr></table></figure>
-<p>Mysql</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">解压到 /usr/local (解压的目录权限和权限组会更改，建议mv一下)</span><br><span class="line">https://github.com/Hackeruncle/MySQL</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 全部删除</span></span><br><span class="line">dG</span><br><span class="line">i</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> mysql生产环境下innodb_buffer_pool_size = 12G 开发小一点2G</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 通过进程查看端口号</span></span><br><span class="line">netstat -nlp | grep pid</span><br><span class="line">show databases;</span><br><span class="line">show create database mysql; # 看看别人是怎么创建的</span><br><span class="line">create databases test_db default character set utf8;</span><br><span class="line">grant all privileges on user.* to 'user'@'%' identified by '123456';</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<p>Mysql jdbc java</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/java</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 重命名不带版本号！坑</span></span><br></pre></td></tr></table></figure>
-<p>离线部署CM（核心产品，闭源）</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">   mkdir /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 1. 解压</span></span><br><span class="line">   tar -xzvf cloudera-manager-centos7-cm5.6...tar.gz -C /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 2. agent配置 hadoop001-hadoop003</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/etc/cloudera-scm-agent</span><br><span class="line">   vim config.ini</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 修改成如下，其他节点分别修改成hadoop001，必须都是hadoop001</span></span><br><span class="line">   server_host=hadoop001</span><br><span class="line">   cd ../</span><br><span class="line">   cd cloudera-scm-server</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 3. server配置 hadoop001</span></span><br><span class="line">   vim db.properties</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 修改成你当初安装mysql时候的用户名</span></span><br><span class="line">   com.cloudera.cmf.db.host=hadoop001</span><br><span class="line">   com.cloudera.cmf.db.name=cmf</span><br><span class="line">   com.cloudera.cmf.db.user=cmf</span><br><span class="line">   com.cloudera.cmf.db.password=123456</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 没有就没有事，有就改成外部的</span></span><br><span class="line">   com.cloudera.cmf.db.setupType=EXTERNAL</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 4. 创建cloudera-scm用户</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 增加用户 </span></span><br><span class="line">   useradd --system --home=/opt/cloudera-manager/cm-5.16.1/run/cloudera-scm-server/  \</span><br><span class="line">   --no-create-home --shell=/bin/false cloudera-scm</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 5. 文件夹用户用户组修改</span></span><br><span class="line">   chown -R cloudera-scm:cloudera-scm /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 6. parcel文件离线源（选择hadoop001作离线源部署）</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 这里先声明一下，我们拷贝的所有cdh相关包放到了/root/cdh5.16.1</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 1可能代表文件下载未完全</span></span><br><span class="line">   cd /root/cdh5.16.1</span><br><span class="line">mkdir -p /opt/cloudera/parcel-repo</span><br><span class="line">   mv CDH-5.16.1...parcel /opt/cloudera/parcel-repo</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 需要重新命名</span></span><br><span class="line">   mv CDH-5.16.1...parcel.sha1 /opt/cloudera/parcel-repo/CDH-5.16.1...parcel.sha</span><br><span class="line">   cd /opt/cloudera/parcel-repo</span><br><span class="line">   cat CDH-5.16.1...parcel.sha</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 系统自带的命令查看</span></span><br><span class="line">   ll /usr/bin/*sha*</span><br><span class="line">   sha1sum ...parcel</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 比较这俩文件，校验一下这个值，看看有没有损坏</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 生产环境必须这样，每整完一个目录，就得赋予一个权限以及权限组 见第5步</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> chown -R cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 若泽大数据老师</span></span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 7. 所有节点创建大数据软件 用户和用户组权限 和 安装目录</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 供解压使用</span></span><br><span class="line">   mkdir -p /opt/cloudera/parcels</span><br><span class="line">   chown -R cloudera-scm:cloudera-scm /opt/cloudera</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"><span class="hljs-comment">########准备工作完毕#######</span></span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 启动server hadoop001</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/etc/init.d</span><br><span class="line">   ./cloudera-scm-server start # 正常要等待1分钟左右，看日志出现7180端口</span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 这里说一下，做大数据开发，大家都是去吃螃蟹，你要学会去找日志，去发现问题，去解决问题，锻炼实战能力</span></span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> copy另外一个tab页去看日志，看看报不报错</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/log/cloudera-scm-server</span><br><span class="line">   tail -F cloudera-scm-server.log</span><br><span class="line">   tail -200f cloudera-scm-server.log # 有错误的话 倒着查200行</span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 开启7180端口，供外部访问，默认账号密码admin admin</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> TODO</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 启动agent hadoop001-hadoop003</span></span><br><span class="line">   /opt/cloudera-manager/cm-5.16.1/etc/init.d/cloudera-scm-agent start</span><br></pre></td></tr></table></figure>
+<h1 id="离线部署CM（核心产品，闭源）"><a href="#离线部署CM（核心产品，闭源）" class="headerlink" title="离线部署CM（核心产品，闭源）"></a>离线部署CM（核心产品，闭源）</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 1. 解压</span></span><br><span class="line">   tar -xzvf cloudera-manager-centos7-cm5.6...tar.gz -C /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 2. agent配置 hadoop001-hadoop003</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/etc/cloudera-scm-agent</span><br><span class="line">   vim config.ini</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 修改成如下，其他节点分别修改成hadoop001，必须都是hadoop001</span></span><br><span class="line">   server_host=hadoop001</span><br><span class="line">   cd ../</span><br><span class="line">cd cloudera-scm-server</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 3. server配置 hadoop001</span></span><br><span class="line">vim db.properties</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 修改成你当初安装mysql时候的用户名</span></span><br><span class="line">com.cloudera.cmf.db.host=hadoop001</span><br><span class="line">com.cloudera.cmf.db.name=cmf</span><br><span class="line">   com.cloudera.cmf.db.user=cmf</span><br><span class="line">com.cloudera.cmf.db.password=123456</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 没有就没有事，有就改成外部的</span></span><br><span class="line">   com.cloudera.cmf.db.setupType=EXTERNAL</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 4. 创建cloudera-scm用户</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 增加用户 </span></span><br><span class="line">useradd --system --home=/opt/cloudera-manager/cm-5.16.1/run/cloudera-scm-server/  \</span><br><span class="line">   --no-create-home --shell=/bin/false cloudera-scm</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 5. 文件夹用户用户组修改</span></span><br><span class="line">   chown -R cloudera-scm:cloudera-scm /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 6. parcel文件离线源（选择hadoop001作离线源部署）</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 这里先声明一下，我们拷贝的所有cdh相关包放到了/root/cdh5.16.1</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 1可能代表文件下载未完全</span></span><br><span class="line">   cd /root/cdh5.16.1</span><br><span class="line">   mkdir -p /opt/cloudera/parcel-repo</span><br><span class="line">   mv CDH-5.16.1...parcel /opt/cloudera/parcel-repo</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 需要重新命名</span></span><br><span class="line">   mv CDH-5.16.1...parcel.sha1 /opt/cloudera/parcel-repo/CDH-5.16.1...parcel.sha</span><br><span class="line">   cd /opt/cloudera/parcel-repo</span><br><span class="line">   cat CDH-5.16.1...parcel.sha</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 系统自带的命令查看</span></span><br><span class="line">   ll /usr/bin/*sha*</span><br><span class="line">   sha1sum ...parcel</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 比较这俩文件，校验一下这个值，看看有没有损坏</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 生产环境必须这样，每整完一个目录，就得赋予一个权限以及权限组 见第5步</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> chown -R cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 若泽大数据老师</span></span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 7. 所有节点创建大数据软件 用户和用户组权限 和 安装目录</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 供解压使用</span></span><br><span class="line">   mkdir -p /opt/cloudera/parcels</span><br><span class="line">   chown -R cloudera-scm:cloudera-scm /opt/cloudera</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"><span class="hljs-comment">########准备工作完毕#######</span></span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 启动server hadoop001</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/etc/init.d</span><br><span class="line">   ./cloudera-scm-server start # 正常要等待1分钟左右，看日志出现7180端口</span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 这里说一下，做大数据开发，大家都是去吃螃蟹，你要学会去找日志，去发现问题，去解决问题，锻炼实战能力</span></span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> copy另外一个tab页去看日志，看看报不报错</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/log/cloudera-scm-server</span><br><span class="line">   tail -F cloudera-scm-server.log</span><br><span class="line">   tail -200f cloudera-scm-server.log # 有错误的话 倒着查200行</span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 开启7180端口，供外部访问，默认账号密码admin admin</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> TODO</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 启动agent hadoop001-hadoop003</span></span><br><span class="line">   /opt/cloudera-manager/cm-5.16.1/etc/init.d/cloudera-scm-agent start</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>   WEB操作</p>
-   <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 会有一个大页面问题，copy两个shell去三台节点都执行一次即可，页面会给提示语句的</span></span><br><span class="line">echo never &gt; /sys/kernel/mm/...</span><br><span class="line">echo never &gt; /sys/kernel/mm/...</span><br></pre></td></tr></table></figure>
+<h1 id="WEB操作"><a href="#WEB操作" class="headerlink" title="WEB操作"></a>WEB操作</h1>   <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 会有一个大页面问题，copy两个shell去三台节点都执行一次即可，页面会给提示语句的</span></span><br><span class="line">   echo never &gt; /sys/kernel/mm/...</span><br><span class="line">   echo never &gt; /sys/kernel/mm/...</span><br></pre></td></tr></table></figure>
 <p>   注意：<strong>数据本地化</strong> <strong>NodeManage same as DataNode</strong></p>
-<p>   这套部署流程是不需要ssh免密的。</p>
-<p>   dashboard查看集群信息，绿色就是ok的。</p>
+<pre><code>这套部署流程是不需要ssh免密的。
 
+dashboard查看集群信息，绿色就是ok的。
+</code></pre>
         </div>
         
         
@@ -626,47 +666,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-25T01:19:41.000Z">2019-09-25</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 57 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/25/mm-0005-动态数据源配置（一）/">动态数据源配置（一）</a>
-            
-        </h1>
-        <div class="content">
-            <p>本文先结合spring，研究一下动态配置数据源是怎么玩的。工作中有遇到过，先玩玩嘿嘿，顺便测试一下我这博客，虽然还不太成熟。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -732,7 +731,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        23
+                        24
                     </p>
                 </div>
             </div>
@@ -752,7 +751,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        23
+                        24
                     </p>
                 </div>
             </div>
@@ -866,7 +865,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/cdh离线安装/" style="font-size: 10px;">cdh离线安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/spark/" style="font-size: 10px;">spark</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式协调服务/" style="font-size: 10px;">分布式协调服务</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/实时流数据处理/" style="font-size: 10px;">实时流数据处理</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/批-微批处理/" style="font-size: 10px;">批/微批处理</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
+        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/cdh离线安装/" style="font-size: 10px;">cdh离线安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/spark/" style="font-size: 10px;">spark</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式协调服务/" style="font-size: 10px;">分布式协调服务</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/实时流数据处理/" style="font-size: 10px;">实时流数据处理</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/批-微批处理/" style="font-size: 10px;">批/微批处理</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
     </div>
 </div>
 
@@ -880,6 +879,25 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/15/mm-0015-mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mm_0015_mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T15:37:45.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/mm-0015-mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mm_0015_mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -957,25 +975,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/30/mm-0010-杂记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="杂记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T05:28:25.000Z">2019-09-30</time></div>
-                    <a href="/2019/09/30/mm-0010-杂记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">杂记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -994,7 +993,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1086,6 +1085,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java-awt-javax-swing/">
                         <span class="tag">java awt javax swing</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1220,6 +1226,25 @@
         
         <article class="media">
             
+            <a href="/2019/10/15/mm-0015-mysql/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mm_0015_mysql">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T15:37:45.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/mm-0015-mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mm_0015_mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/10/14/mm-0014-CDH/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="CDH">
@@ -1294,25 +1319,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/30/mm-0010-杂记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="杂记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T05:28:25.000Z">2019-09-30</time></div>
-                    <a href="/2019/09/30/mm-0010-杂记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">杂记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1331,7 +1337,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1423,6 +1429,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java-awt-javax-swing/">
                         <span class="tag">java awt javax swing</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
