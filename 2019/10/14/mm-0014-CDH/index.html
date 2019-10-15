@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>spark - 曲奇小猪的测试博客</title>
+<title>CDH - 曲奇小猪的测试博客</title>
 
 
-    <meta name="description" content="起步1Steps to Connect Oracle Database from Spark – Examples">
-<meta name="keywords" content="spark,批&#x2F;微批处理,实时流数据处理">
+    <meta name="description" content="CDH离线 mysql离线 mysql-5.6.23-linux-glibc2.5-x86_64.tar.gz  CM离线 cm5.11.0-centos6.tar.gz  P文件离线 CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel.sha manifest.json  环境准备 3台虚">
+<meta name="keywords" content="cdh离线安装">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark">
-<meta property="og:url" content="http://yoursite.com/2019/10/11/mm-0012-spark/index.html">
+<meta property="og:title" content="CDH">
+<meta property="og:url" content="http://yoursite.com/2019/10/14/mm-0014-CDH/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
-<meta property="og:description" content="起步1Steps to Connect Oracle Database from Spark – Examples">
+<meta property="og:description" content="CDH离线 mysql离线 mysql-5.6.23-linux-glibc2.5-x86_64.tar.gz  CM离线 cm5.11.0-centos6.tar.gz  P文件离线 CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel.sha manifest.json  环境准备 3台虚">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-11T02:21:25.130Z">
+<meta property="og:updated_time" content="2019-10-15T03:09:11.001Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark">
-<meta name="twitter:description" content="起步1Steps to Connect Oracle Database from Spark – Examples">
+<meta name="twitter:title" content="CDH">
+<meta name="twitter:description" content="CDH离线 mysql离线 mysql-5.6.23-linux-glibc2.5-x86_64.tar.gz  CM离线 cm5.11.0-centos6.tar.gz  P文件离线 CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel.sha manifest.json  环境准备 3台虚">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -93,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="spark" height="28">
+                <img src="/images/logo.svg" alt="CDH" height="28">
             
             </a>
         </div>
@@ -149,13 +149,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-11T02:14:49.000Z">2019-10-11</time>
+                <time class="level-item has-text-grey" datetime="2019-10-14T09:20:04.000Z">2019-10-14</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 12 words)
+                    6 minutes read (About 930 words)
                 </span>
                 
                 
@@ -164,11 +164,51 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                spark
+                CDH
             
         </h1>
         <div class="content">
-            <h1 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h1><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steps to Connect Oracle Database from Spark – Examples</span><br></pre></td></tr></table></figure>
+            <h1 id="CDH离线"><a href="#CDH离线" class="headerlink" title="CDH离线"></a>CDH离线</h1><ol>
+<li><p>mysql离线</p>
+<p>mysql-5.6.23-linux-glibc2.5-x86_64.tar.gz</p>
+</li>
+<li><p>CM离线</p>
+<p>cm5.11.0-centos6.tar.gz</p>
+</li>
+<li><p>P文件离线</p>
+<p>CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel</p>
+<p>CDH-5.11.0-1.cdh5.11.0.p0.34-el6.parcel.sha</p>
+<p>manifest.json</p>
+</li>
+<li><p>环境准备</p>
+<p>3台虚拟机</p>
+<p>jdk</p>
+<p>mysql-connector-java</p>
+</li>
+<li><p>节点初始化</p>
+<p>hosts文件（免密）</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts </span><br><span class="line">// 追加</span><br><span class="line">172.19.7.96 hadoop001</span><br><span class="line">172.19.7.97 hadoop002</span><br><span class="line">172.19.7.98 hadoop003</span><br></pre></td></tr></table></figure>
+<p>防火墙</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br><span class="line">iptables -L</span><br><span class="line">iptables -F</span><br></pre></td></tr></table></figure>
+<p>selinux</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/selinux/config</span><br><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
+<p>时区和时钟的同步</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">date</span><br><span class="line">crontab -e</span><br><span class="line">i</span><br><span class="line">00 00 * * * /usr/sbin/ntpdate hadoop001 # 每天0点同步一次</span><br></pre></td></tr></table></figure>
+<p>jdk</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/java</span><br><span class="line">tar -zxvf jdk.tg -C /usr/java</span><br></pre></td></tr></table></figure>
+<p>Mysql</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">解压到 /usr/local (解压的目录权限和权限组会更改，建议mv一下)</span><br><span class="line">https://github.com/Hackeruncle/MySQL</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 全部删除</span></span><br><span class="line">dG</span><br><span class="line">i</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> mysql生产环境下innodb_buffer_pool_size = 12G 开发小一点2G</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 通过进程查看端口号</span></span><br><span class="line">netstat -nlp | grep pid</span><br><span class="line">show databases;</span><br><span class="line">show create database mysql; # 看看别人是怎么创建的</span><br><span class="line">create databases test_db default character set utf8;</span><br><span class="line">grant all privileges on user.* to 'user'@'%' identified by '123456';</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>Mysql jdbc java</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/java</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 重命名不带版本号！坑</span></span><br></pre></td></tr></table></figure>
+<p>离线部署CM（核心产品，闭源）</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">   mkdir /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 1. 解压</span></span><br><span class="line">   tar -xzvf cloudera-manager-centos7-cm5.6...tar.gz -C /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 2. agent配置 hadoop001-hadoop003</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/etc/cloudera-scm-agent</span><br><span class="line">   vim config.ini</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 修改成如下，其他节点分别修改成hadoop001，必须都是hadoop001</span></span><br><span class="line">   server_host=hadoop001</span><br><span class="line">   cd ../</span><br><span class="line">   cd cloudera-scm-server</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 3. server配置 hadoop001</span></span><br><span class="line">   vim db.properties</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 修改成你当初安装mysql时候的用户名</span></span><br><span class="line">   com.cloudera.cmf.db.host=hadoop001</span><br><span class="line">   com.cloudera.cmf.db.name=cmf</span><br><span class="line">   com.cloudera.cmf.db.user=cmf</span><br><span class="line">   com.cloudera.cmf.db.password=123456</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 没有就没有事，有就改成外部的</span></span><br><span class="line">   com.cloudera.cmf.db.setupType=EXTERNAL</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 4. 创建cloudera-scm用户</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 增加用户 </span></span><br><span class="line">   useradd --system --home=/opt/cloudera-manager/cm-5.16.1/run/cloudera-scm-server/  \</span><br><span class="line">   --no-create-home --shell=/bin/false cloudera-scm</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 5. 文件夹用户用户组修改</span></span><br><span class="line">   chown -R cloudera-scm:cloudera-scm /opt/cloudera-manager</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 6. parcel文件离线源（选择hadoop001作离线源部署）</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 这里先声明一下，我们拷贝的所有cdh相关包放到了/root/cdh5.16.1</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 1可能代表文件下载未完全</span></span><br><span class="line">   cd /root/cdh5.16.1</span><br><span class="line">mkdir -p /opt/cloudera/parcel-repo</span><br><span class="line">   mv CDH-5.16.1...parcel /opt/cloudera/parcel-repo</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 需要重新命名</span></span><br><span class="line">   mv CDH-5.16.1...parcel.sha1 /opt/cloudera/parcel-repo/CDH-5.16.1...parcel.sha</span><br><span class="line">   cd /opt/cloudera/parcel-repo</span><br><span class="line">   cat CDH-5.16.1...parcel.sha</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 系统自带的命令查看</span></span><br><span class="line">   ll /usr/bin/*sha*</span><br><span class="line">   sha1sum ...parcel</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 比较这俩文件，校验一下这个值，看看有没有损坏</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 生产环境必须这样，每整完一个目录，就得赋予一个权限以及权限组 见第5步</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> chown -R cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 若泽大数据老师</span></span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 7. 所有节点创建大数据软件 用户和用户组权限 和 安装目录</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 供解压使用</span></span><br><span class="line">   mkdir -p /opt/cloudera/parcels</span><br><span class="line">   chown -R cloudera-scm:cloudera-scm /opt/cloudera</span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"><span class="hljs-comment">########准备工作完毕#######</span></span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 启动server hadoop001</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/etc/init.d</span><br><span class="line">   ./cloudera-scm-server start # 正常要等待1分钟左右，看日志出现7180端口</span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 这里说一下，做大数据开发，大家都是去吃螃蟹，你要学会去找日志，去发现问题，去解决问题，锻炼实战能力</span></span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> copy另外一个tab页去看日志，看看报不报错</span></span><br><span class="line">   cd /opt/cloudera-manager/cm-5.16.1/log/cloudera-scm-server</span><br><span class="line">   tail -F cloudera-scm-server.log</span><br><span class="line">   tail -200f cloudera-scm-server.log # 有错误的话 倒着查200行</span><br><span class="line">   </span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 开启7180端口，供外部访问，默认账号密码admin admin</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> TODO</span></span><br><span class="line"><span class="hljs-meta">   #</span><span class="hljs-bash"> 启动agent hadoop001-hadoop003</span></span><br><span class="line">   /opt/cloudera-manager/cm-5.16.1/etc/init.d/cloudera-scm-agent start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   WEB操作</p>
+   <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 会有一个大页面问题，copy两个shell去三台节点都执行一次即可，页面会给提示语句的</span></span><br><span class="line">echo never &gt; /sys/kernel/mm/...</span><br><span class="line">echo never &gt; /sys/kernel/mm/...</span><br></pre></td></tr></table></figure>
+<p>   注意：<strong>数据本地化</strong> <strong>NodeManage same as DataNode</strong></p>
+<p>   这套部署流程是不需要ssh免密的。</p>
+<p>   dashboard查看集群信息，绿色就是ok的。</p>
 
         </div>
         
@@ -176,7 +216,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/spark/">spark</a>, <a class="has-link-grey -link" href="/tags/实时流数据处理/">实时流数据处理</a>, <a class="has-link-grey -link" href="/tags/批-微批处理/">批/微批处理</a>
+                    <a class="has-link-grey -link" href="/tags/cdh离线安装/">cdh离线安装</a>
                 </div>
             </div>
         </div>
@@ -227,17 +267,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/13/mm-0013-zookeeper应用/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">zookeeper</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/11/mm-0011-hadoop/">
-                <span class="level-item">hadoop</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/13/mm-0013-zookeeper应用/">
+                <span class="level-item">zookeeper</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1107,7 +1140,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="spark" height="28">
+                    <img src="/images/logo.svg" alt="CDH" height="28">
                 
                 </a>
                 <p class="is-size-7">

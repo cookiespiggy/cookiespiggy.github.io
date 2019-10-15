@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 819 words)
+                    11 minutes read (About 1622 words)
                 </span>
                 
                 
@@ -198,6 +198,23 @@
 <p>Utils - 工具类</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Utils</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Map&lt;String, String&gt; <span class="hljs-title">parseConfig</span><span class="hljs-params">(String config)</span> </span>&#123;</span><br><span class="line">        String[] pairs = config.split(<span class="hljs-string">"&amp;"</span>);</span><br><span class="line">        Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="hljs-keyword">for</span> (String pair : pairs) &#123;</span><br><span class="line">            String[] kv = pair.split(<span class="hljs-string">"="</span>);</span><br><span class="line">            map.put(kv[<span class="hljs-number">0</span>], kv[<span class="hljs-number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>达到的效果是：在不同机器上启动DistributeApp，启动ConfigPublisher修改数据，DistributeApp可以不用停止即可获取最新修改的数据。</p>
+<h1 id="zookeeper使用场景之分布式锁"><a href="#zookeeper使用场景之分布式锁" class="headerlink" title="zookeeper使用场景之分布式锁"></a>zookeeper使用场景之分布式锁</h1><p>DistributeApp - 分布式APP，并发访问一段代码（临界区被不同的JVM访问）。多个分布式APP同时访问一个临界区，同一时刻只允许一个线程执行。</p>
+<blockquote>
+<p>原理：</p>
+<p>每个APP启动的时候，连接zk服务，不存在/locks永久节点就创建。</p>
+<p>然后创建临时有序节点</p>
+<p>此时znode图</p>
+<p>/locks</p>
+<p>​    /app2_lock_0000000000</p>
+<p>​    /app2_lock_0000000001</p>
+<p>​    /app2_lock_0000000002</p>
+<p>​    /app2_lock_0000000003</p>
+<p>最小的执行，别的都注册监听上一个节点。</p>
+<p>一旦节点被删除了，下一个节点开始执行。</p>
+</blockquote>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DistributeApp</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        DistributedLock lock = <span class="hljs-keyword">new</span> DistributedLock(<span class="hljs-string">"node1:2181"</span>, <span class="hljs-string">"app2"</span>);</span><br><span class="line"></span><br><span class="line">        lock.lock();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="hljs-string">"Do Something With Database"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">long</span> sleepDuration = <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">        TimeUnit.SECONDS.sleep(sleepDuration);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != lock) &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>DistributedLock - 分布式锁</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DistributedLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Watcher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> ZooKeeper zk;</span><br><span class="line">    <span class="hljs-keyword">private</span> String root = <span class="hljs-string">"/locks"</span>; <span class="hljs-comment">// 根节点</span></span><br><span class="line">    <span class="hljs-keyword">private</span> String lockName; <span class="hljs-comment">// 竞争资源的标志</span></span><br><span class="line">    <span class="hljs-keyword">private</span> String waitNode; <span class="hljs-comment">// 等待前一个锁</span></span><br><span class="line">    <span class="hljs-keyword">private</span> String myZnode; <span class="hljs-comment">// 当前锁</span></span><br><span class="line">    <span class="hljs-keyword">private</span> CountDownLatch latch;</span><br><span class="line">    <span class="hljs-keyword">private</span> CountDownLatch connectedSignal = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> sessionTimeOut = <span class="hljs-number">50_000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 创建分布式锁，使用前请确认config配置的zk服务可用</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> config   leader:2181</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> lockName 竞争资源标志，lockName中不能包含单词_lock_</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DistributedLock</span><span class="hljs-params">(String config, String lockName)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.lockName = lockName;</span><br><span class="line">        <span class="hljs-comment">// 创建一个与服务器的连接</span></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            Watcher watcher;</span><br><span class="line">            zk = <span class="hljs-keyword">new</span> ZooKeeper(config, sessionTimeOut, <span class="hljs-keyword">this</span>);</span><br><span class="line">            connectedSignal.await();</span><br><span class="line">            Stat stat = zk.exists(root, <span class="hljs-keyword">false</span>); <span class="hljs-comment">// 此处不执行 Watcher</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> == stat) &#123;</span><br><span class="line">                <span class="hljs-comment">// 创建根节点</span></span><br><span class="line">                zk.create(root, <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">0</span>], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.tryLock()) &#123;</span><br><span class="line">                System.out.println(<span class="hljs-string">"Thread "</span> + Thread.currentThread().getId() + <span class="hljs-string">" "</span> + myZnode + <span class="hljs-string">" get lock true"</span>);</span><br><span class="line">                <span class="hljs-keyword">return</span>;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                waitForLock(waitNode, sessionTimeOut); <span class="hljs-comment">// 等待锁</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> LockException(e);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> LockException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        String splitStr = <span class="hljs-string">"_lock_"</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (lockName.contains(splitStr)) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> LockException(<span class="hljs-string">"lockName can not contains \\u000B"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">// 创建临时子节点</span></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            myZnode = zk.create(root + <span class="hljs-string">"/"</span> + lockName + splitStr,</span><br><span class="line">                    <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">0</span>], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line">            System.out.println(myZnode + <span class="hljs-string">" is created"</span>);</span><br><span class="line">            <span class="hljs-comment">// 取出所有子节点</span></span><br><span class="line">            List&lt;String&gt; subNodes = zk.getChildren(root, <span class="hljs-keyword">false</span>);</span><br><span class="line">            <span class="hljs-comment">// 取出所有lockName的锁</span></span><br><span class="line">            List&lt;String&gt; lockObjNodes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="hljs-keyword">for</span> (String node : subNodes) &#123;</span><br><span class="line">                String _node = node.split(splitStr)[<span class="hljs-number">0</span>];</span><br><span class="line">                <span class="hljs-keyword">if</span> (_node.equals(lockName)) &#123;</span><br><span class="line">                    lockObjNodes.add(node);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            Collections.sort(lockObjNodes);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">if</span> (myZnode.equals(root + <span class="hljs-string">"/"</span> + lockObjNodes.get(<span class="hljs-number">0</span>))) &#123;</span><br><span class="line">                <span class="hljs-comment">// 如果是最小的节点，则表示取得锁</span></span><br><span class="line">                System.out.println(myZnode + <span class="hljs-string">"=="</span> + lockObjNodes.get(<span class="hljs-number">0</span>));</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment">// 如果不是最小的节点，找到比自己小1的节点</span></span><br><span class="line">            String subMyZnode = myZnode.substring(myZnode.lastIndexOf(<span class="hljs-string">"/"</span>) + <span class="hljs-number">1</span>);</span><br><span class="line">            waitNode = lockObjNodes.get(Collections.binarySearch(lockObjNodes, subMyZnode) - <span class="hljs-number">1</span>); <span class="hljs-comment">// 找到前一个子节点</span></span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> LockException(e);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> LockException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">waitForLock</span><span class="hljs-params">(String lower, <span class="hljs-keyword">int</span> waitTime)</span> <span class="hljs-keyword">throws</span> KeeperException, InterruptedException </span>&#123;</span><br><span class="line">        Stat stat = zk.exists(root + <span class="hljs-string">"/"</span> + lower, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// 同时注册监听</span></span><br><span class="line">        <span class="hljs-comment">// 判断比自己小的一个数的节点是否存在，如果不存在则无需等待锁，同时注册监听</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != stat) &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"Thread "</span> + Thread.currentThread().getId() + <span class="hljs-string">" waiting for "</span> + root + <span class="hljs-string">"/"</span> + lower);</span><br><span class="line">            <span class="hljs-keyword">this</span>.latch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);</span><br><span class="line">            <span class="hljs-keyword">this</span>.latch.await(waitTime, TimeUnit.MILLISECONDS); <span class="hljs-comment">// 等待，这里应该一直等待其他线程释放锁</span></span><br><span class="line">            <span class="hljs-keyword">this</span>.latch = <span class="hljs-keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"unlock "</span> + myZnode);</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            zk.delete(myZnode, -<span class="hljs-number">1</span>);</span><br><span class="line">            myZnode = <span class="hljs-keyword">null</span>;</span><br><span class="line">            zk.close();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * zk节点的监视器</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(WatchedEvent event)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"触发了watch事件"</span>);</span><br><span class="line">        <span class="hljs-comment">// 建立连接用</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (event.getState() == Event.KeeperState.SyncConnected &amp;&amp; event.getType() == Event.EventType.None) &#123;</span><br><span class="line">            connectedSignal.countDown();</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 其他线程放弃锁的标志</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"this latch= "</span> + <span class="hljs-keyword">this</span>.latch);</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != <span class="hljs-keyword">this</span>.latch) &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"等待的锁已经释放了..."</span>);</span><br><span class="line">            <span class="hljs-keyword">this</span>.latch.countDown();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -257,7 +274,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        22
+                        23
                     </p>
                 </div>
             </div>
@@ -277,7 +294,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        22
+                        23
                     </p>
                 </div>
             </div>
@@ -391,7 +408,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/spark/" style="font-size: 10px;">spark</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式协调服务/" style="font-size: 10px;">分布式协调服务</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/实时流数据处理/" style="font-size: 10px;">实时流数据处理</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/批-微批处理/" style="font-size: 10px;">批/微批处理</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
+        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/cdh离线安装/" style="font-size: 10px;">cdh离线安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/spark/" style="font-size: 10px;">spark</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式协调服务/" style="font-size: 10px;">分布式协调服务</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/实时流数据处理/" style="font-size: 10px;">实时流数据处理</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/批-微批处理/" style="font-size: 10px;">批/微批处理</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
     </div>
 </div>
 
@@ -405,6 +422,25 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/14/mm-0014-CDH/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="CDH">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-14T09:20:04.000Z">2019-10-14</time></div>
+                    <a href="/2019/10/14/mm-0014-CDH/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CDH</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -482,25 +518,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/30/mm-0009-HDFS/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HDFS">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T02:30:47.000Z">2019-09-30</time></div>
-                    <a href="/2019/09/30/mm-0009-HDFS/" class="title has-link-black-ter is-size-6 has-text-weight-normal">HDFS</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -519,7 +536,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -576,6 +593,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux下mysql的安装/">
                         <span class="tag">Linux下mysql的安装</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cdh离线安装/">
+                        <span class="tag">cdh离线安装</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -738,6 +762,25 @@
         
         <article class="media">
             
+            <a href="/2019/10/14/mm-0014-CDH/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="CDH">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-14T09:20:04.000Z">2019-10-14</time></div>
+                    <a href="/2019/10/14/mm-0014-CDH/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CDH</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/10/13/mm-0013-zookeeper应用/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="zookeeper">
@@ -812,25 +855,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/30/mm-0009-HDFS/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HDFS">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T02:30:47.000Z">2019-09-30</time></div>
-                    <a href="/2019/09/30/mm-0009-HDFS/" class="title has-link-black-ter is-size-6 has-text-weight-normal">HDFS</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -849,7 +873,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -906,6 +930,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux下mysql的安装/">
                         <span class="tag">Linux下mysql的安装</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cdh离线安装/">
+                        <span class="tag">cdh离线安装</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
