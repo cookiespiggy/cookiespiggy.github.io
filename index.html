@@ -148,6 +148,62 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-04T07:43:21.000Z">2019-11-04</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 328 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/04/Structured-Streaming/">Structured Streaming Programming Guide</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="Structured-Streaming-Programming-Guide"><a href="#Structured-Streaming-Programming-Guide" class="headerlink" title="Structured Streaming Programming Guide"></a>Structured Streaming Programming Guide</h1><p>spark生态中，可以处理实时流式的是spark streaming。它的瓶颈是</p>
+<ul>
+<li><p>无法做到exectly once。</p>
+</li>
+<li><p>处理数据时，只能基于它【收到数据的时间】来处理，无法基于【数据产生的时间】来处理</p>
+<p>比如10点产生的数据，DStream在12点收到的，延迟了2小时，DStream在处理的时候，应该把这条数据放到10点的那个窗口里面去处理，但是DStream却无能为力。换句话说，DStream处理流数据只能基于收到数据的时间，不能基于数据产生的时间（也叫event time）。</p>
+</li>
+<li><p>如果数据延迟太久，就失去了数据的意义了，应该直接抛弃，这一点DStream也做不到。</p>
+</li>
+</ul>
+<p>结构化流加了个水印（时间戳），就解决了上述问题。</p>
+<ul>
+<li>实时数据长时间在内存驻留，内存肯定不够。有些数据不会再使用，应该清理，DStream也做不到。</li>
+</ul>
+<p>结构化流已在国外被应用于生产，国内还比较少。</p>
+<h1 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h1><p><a href="https://zhenchao125.github.io/bigdata_spark-project_atguigu/di-7-bu-fen-structured-streaming/di-3-zhang-structured-streaming-bian-cheng-mo-xing/31-ji-ben-gai-nian.html" target="_blank" rel="noopener">https://zhenchao125.github.io/bigdata_spark-project_atguigu/di-7-bu-fen-structured-streaming/di-3-zhang-structured-streaming-bian-cheng-mo-xing/31-ji-ben-gai-nian.html</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-10-30T15:55:01.000Z">2019-10-30</time>
                 
                 
@@ -626,56 +682,15 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-27T10:13:17.000Z">2019-09-27</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 29 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/27/mm-0007-排序算法之快排/">排序算法之快排</a>
-            
-        </h1>
-        <div class="content">
-            <p>等学完电子科技大学的课程和bobo老师@慕课网的教程之后，再来梳理 </p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/0/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/0/">Anterior</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/2/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -729,17 +744,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
-                        25
+                        26
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -749,17 +764,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
-                        25
+                        28
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/cookiespiggy" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -851,7 +866,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             
@@ -864,9 +879,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
-        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/cdh离线安装/" style="font-size: 10px;">cdh离线安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/spark/" style="font-size: 10px;">spark</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式协调服务/" style="font-size: 10px;">分布式协调服务</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/实时流数据处理/" style="font-size: 10px;">实时流数据处理</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/批-微批处理/" style="font-size: 10px;">批/微批处理</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
+        <a href="/tags/Java生产环境工具/" style="font-size: 10px;">Java生产环境工具</a> <a href="/tags/Java线程池原理-demo/" style="font-size: 10px;">Java线程池原理 demo</a> <a href="/tags/Linux下mysql的安装/" style="font-size: 10px;">Linux下mysql的安装</a> <a href="/tags/Structured-Streaming/" style="font-size: 10px;">Structured Streaming</a> <a href="/tags/cdh离线安装/" style="font-size: 10px;">cdh离线安装</a> <a href="/tags/hadoop/" style="font-size: 20px;">hadoop</a> <a href="/tags/hdfs/" style="font-size: 20px;">hdfs</a> <a href="/tags/hexo-install-theme/" style="font-size: 10px;">hexo install theme</a> <a href="/tags/java-awt-javax-swing/" style="font-size: 10px;">java awt javax swing</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/mysql8-0-mysql8/" style="font-size: 10px;">mysql8.0 mysql8.+</a> <a href="/tags/quicksort/" style="font-size: 10px;">quicksort</a> <a href="/tags/spark/" style="font-size: 10px;">spark</a> <a href="/tags/springboot-mybatis-maven-最佳实践/" style="font-size: 10px;">springboot mybatis maven 最佳实践</a> <a href="/tags/ssm配置文件/" style="font-size: 10px;">ssm配置文件</a> <a href="/tags/xcall-ssh/" style="font-size: 10px;">xcall ssh</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式协调服务/" style="font-size: 10px;">分布式协调服务</a> <a href="/tags/大数据Java组件/" style="font-size: 10px;">大数据Java组件</a> <a href="/tags/如何写博客-懒人写博客/" style="font-size: 10px;">如何写博客 懒人写博客</a> <a href="/tags/实时流/" style="font-size: 10px;">实时流</a> <a href="/tags/实时流数据处理/" style="font-size: 10px;">实时流数据处理</a> <a href="/tags/实时计算/" style="font-size: 10px;">实时计算</a> <a href="/tags/并发-面试/" style="font-size: 10px;">并发 面试</a> <a href="/tags/批-微批处理/" style="font-size: 10px;">批/微批处理</a> <a href="/tags/日常杂记Java/" style="font-size: 10px;">日常杂记Java</a> <a href="/tags/测试标签的写法/" style="font-size: 10px;">测试标签的写法</a>
     </div>
 </div>
 
@@ -878,8 +893,27 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/11/04/Structured-Streaming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Structured Streaming Programming Guide">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-04T07:43:21.000Z">2019-11-04</time></div>
+                    <a href="/2019/11/04/Structured-Streaming/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Structured Streaming Programming Guide</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -957,25 +991,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/10/11/mm-0012-spark/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T02:14:49.000Z">2019-10-11</time></div>
-                    <a href="/2019/10/11/mm-0012-spark/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -984,9 +999,20 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/10/">
@@ -1030,7 +1056,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1051,6 +1077,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux下mysql的安装/">
                         <span class="tag">Linux下mysql的安装</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Structured-Streaming/">
+                        <span class="tag">Structured Streaming</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1175,8 +1208,22 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/实时流/">
+                        <span class="tag">实时流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/实时流数据处理/">
                         <span class="tag">实时流数据处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/实时计算/">
+                        <span class="tag">实时计算</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1229,8 +1276,27 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/11/04/Structured-Streaming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Structured Streaming Programming Guide">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-04T07:43:21.000Z">2019-11-04</time></div>
+                    <a href="/2019/11/04/Structured-Streaming/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Structured Streaming Programming Guide</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1308,25 +1374,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/10/11/mm-0012-spark/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T02:14:49.000Z">2019-10-11</time></div>
-                    <a href="/2019/10/11/mm-0012-spark/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1335,9 +1382,20 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/10/">
@@ -1381,7 +1439,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1402,6 +1460,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux下mysql的安装/">
                         <span class="tag">Linux下mysql的安装</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Structured-Streaming/">
+                        <span class="tag">Structured Streaming</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1526,8 +1591,22 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/实时流/">
+                        <span class="tag">实时流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/实时流数据处理/">
                         <span class="tag">实时流数据处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/实时计算/">
+                        <span class="tag">实时计算</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1744,10 +1823,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
