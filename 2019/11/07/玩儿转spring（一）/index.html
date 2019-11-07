@@ -7,20 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Tag: ssm配置文件 - 曲奇小猪的测试博客</title>
+<title>玩儿转spring（一） - 曲奇小猪的测试博客</title>
 
 
-    <meta name="description" content="天津理工大学(11级计算机系)">
-<meta property="og:type" content="website">
-<meta property="og:title" content="曲奇小猪的测试博客">
-<meta property="og:url" content="http://yoursite.com/tags/ssm配置文件/index.html">
+    <meta name="description" content="#spring mvc 高级玩儿法  需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒   1、springmvc参数解析  页面请求带参数 lxTime:st-et 定义注解如  1234567@Target(ElementType.PARAMETER)@Retention(RetentionPolicy.RUNTIME)@Documentedpublic @inte">
+<meta name="keywords" content="spring mvc 高级玩儿法,spring aop 实战应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩儿转spring（一）">
+<meta property="og:url" content="http://yoursite.com/2019/11/07/玩儿转spring（一）/index.html">
 <meta property="og:site_name" content="曲奇小猪的测试博客">
-<meta property="og:description" content="天津理工大学(11级计算机系)">
+<meta property="og:description" content="#spring mvc 高级玩儿法  需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒   1、springmvc参数解析  页面请求带参数 lxTime:st-et 定义注解如  1234567@Target(ElementType.PARAMETER)@Retention(RetentionPolicy.RUNTIME)@Documentedpublic @inte">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-11-07T04:01:57.983Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="曲奇小猪的测试博客">
-<meta name="twitter:description" content="天津理工大学(11级计算机系)">
+<meta name="twitter:title" content="玩儿转spring（一）">
+<meta name="twitter:description" content="#spring mvc 高级玩儿法  需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒   1、springmvc参数解析  页面请求带参数 lxTime:st-et 定义注解如  1234567@Target(ElementType.PARAMETER)@Retention(RetentionPolicy.RUNTIME)@Documentedpublic @inte">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -91,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
+                <img src="/images/logo.svg" alt="玩儿转spring（一）" height="28">
             
             </a>
         </div>
@@ -142,29 +144,18 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">ssm配置文件</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-24T07:19:19.000Z">2019-09-24</time>
+                <time class="level-item has-text-grey" datetime="2019-11-07T03:02:43.000Z">2019-11-07</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 124 words)
+                    6 minutes read (About 851 words)
                 </span>
                 
                 
@@ -173,13 +164,66 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/09/24/mm-0001-SSM配置/">SSM配置</a>
+                玩儿转spring（一）
             
         </h1>
         <div class="content">
-            <h1 id="1、Mybatis的配置"><a href="#1、Mybatis的配置" class="headerlink" title="1、Mybatis的配置"></a>1、Mybatis的配置</h1><p>sqlMapConfig.xml<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="hljs-meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="hljs-meta">  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="hljs-meta">  "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line">	<span class="hljs-comment">&lt;!-- 配置全局属性 --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"useGeneratedKeys"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 使用列别名替换列名 默认:true --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"useColumnLabel"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 开启驼峰命名转换:Table&#123;create_time&#125; -&gt; Entity&#123;createTime&#125; --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"mapUnderscoreToCamelCase"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="hljs-comment">&lt;!-- 打印查询语句 --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"logImpl"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"STDOUT_LOGGING"</span> /&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>sql语句为<br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`t_account`</span> (</span><br><span class="line">  <span class="hljs-string">`id`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">5</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="hljs-string">`name`</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">200</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-string">`money`</span> <span class="hljs-built_in">float</span>(<span class="hljs-number">5</span>,<span class="hljs-number">2</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span>, <span class="hljs-comment"># https://www.cnblogs.com/shamo89/p/8202837.html</span></span><br><span class="line">  PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>),</span><br><span class="line">  <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">KEY</span> <span class="hljs-string">`UK_NAME`</span> (<span class="hljs-string">`name`</span>)</span><br><span class="line">) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> AUTO_INCREMENT=<span class="hljs-number">7</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure></p>
+            <p>#spring mvc 高级玩儿法</p>
+<blockquote>
+<p>需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒</p>
+</blockquote>
+<p> 1、springmvc参数解析</p>
+<ul>
+<li>页面请求带参数 lxTime:st-et</li>
+<li>定义注解如</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Target</span>(ElementType.PARAMETER)</span><br><span class="line"><span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="hljs-meta">@Documented</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> CurrentTime&#123;</span><br><span class="line">  <span class="hljs-function">String <span class="hljs-title">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> “lxTime；</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-keyword">boolean</span> <span class="hljs-title">required</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">true</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义Pojo接收st、et</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimeParam</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">// 省略getter、setter lombok</span></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> st;</span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> et;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>继承AbstractNamedValueMethodArgumentResolver(其实就是要实现HandlerMethodArgumentResolver,只不过Spring默认给我们提供一个抽象实现，都是这种设计。Interface，Abs实现通用的，我们继承Abs即可)</p>
+</li>
+<li><p>Controller层使用</p>
+</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">method(<span class="hljs-meta">@CurrentTime</span>() TimeParam t) &#123;</span><br><span class="line">  <span class="hljs-keyword">long</span> st = t.getSt();</span><br><span class="line">  <span class="hljs-keyword">long</span> et = t.getEt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="aop的应用之简单复杂重复逻辑分页"><a href="#aop的应用之简单复杂重复逻辑分页" class="headerlink" title="aop的应用之简单复杂重复逻辑分页"></a>aop的应用之简单复杂重复逻辑分页</h1><blockquote>
+<p>当时前后端都自己写，也想偷懒。</p>
+<p>需要分析：前端页面需要显示3个Table，需要分页，但是有的Table的row数据都需要查询某某表并打标签（sql可以做，但是没用，想拿aop练练手），相似的逻辑，怎么办？用aop</p>
+<p>需要解决俩难度问题：</p>
+<ul>
+<li>切面类如何拿到我请求参数中的值</li>
+<li>分页也可以用aop做，必须的，用@Around环绕，invoke之后把total塞回去</li>
+<li>idea做的真强大，aop定位相当准确</li>
+</ul>
+</blockquote>
+<p>开LU代码</p>
+<ul>
+<li>定义注解</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> UsePage &#123;</span><br><span class="line">  <span class="hljs-function">String <span class="hljs-title">currentPage</span><span class="hljs-params">()</span></span>;</span><br><span class="line">  <span class="hljs-function">String <span class="hljs-title">pageSize</span><span class="hljs-params">()</span></span>;</span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">showTag</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">false</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在你需要被切面切入的地方，使用这个注解</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 正常情况话，切面是可以拿到注解的信息的，但是这种，我参数动态传，切面类如何拿到 好戏开始了</span></span><br><span class="line"><span class="hljs-meta">@UsePage</span>(currentPage = <span class="hljs-string">"#currentPage"</span>,pageSize=<span class="hljs-string">"#pageSize"</span>,showTag = <span class="hljs-keyword">true</span>)</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> ApiResponse <span class="hljs-title">queryXxxPage</span> <span class="hljs-params">(Integer currentPage, Integer pageSize, ...)</span> </span>&#123;</span><br><span class="line">  List&lt;T&gt; list = xxxMapper.find...(不用传分页信息，...);</span><br><span class="line">  <span class="hljs-keyword">return</span> ApiResponse.ofSuccessPager(list,<span class="hljs-number">0</span>,<span class="hljs-keyword">true</span>); <span class="hljs-comment">// 0为total总数，先默认返回0，再由切面类补充上</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义切面类</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Component</span></span><br><span class="line"><span class="hljs-meta">@Aspect</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UsePageAspect</span> </span>&#123;</span><br><span class="line">  <span class="hljs-meta">@Autowired</span></span><br><span class="line">  <span class="hljs-keyword">private</span> XXXMappper xxxMapper; <span class="hljs-comment">// spring4 之后推荐构造注入，一开始就避免循环依赖问题</span></span><br><span class="line">  </span><br><span class="line">  <span class="hljs-meta">@Around</span>(<span class="hljs-string">"@annotation(up)"</span>)</span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">doAround</span><span class="hljs-params">(ProcessdingJoinPoint pjp,UsePage up)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    String currentPage = get(up.getCurrentPage(),pjp);</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-comment">// 开启分页  mybatis的PageHelper插件</span></span><br><span class="line">    PageHelper.starPage(...);</span><br><span class="line">    Object obj = pjp.proceed();</span><br><span class="line">    PageInfo&lt;...&gt; pageInfo = <span class="hljs-keyword">new</span> PageInfo&lt;&gt;(list(obj)强制的);</span><br><span class="line">    <span class="hljs-comment">// 此处是把返回值强转成List&lt;T&gt;的，因为特定一类业务一个页面类嘛</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">boolean</span> showTag = up.showTag();</span><br><span class="line">    <span class="hljs-keyword">if</span>(showTag) &#123;</span><br><span class="line">      <span class="hljs-comment">// do something</span></span><br><span class="line">      <span class="hljs-comment">// 组装bean</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> ApiResponse.ofSuccessPager(list是组装之后的List&lt;bean&gt;,pageInfo.getTotal()根据分页插件或者啥的拿到真正的count,<span class="hljs-keyword">true</span>); </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment">// LocalVariableTableParameterNameDiscoverer 说说spring其中的精髓，你把bean注册给我了，我通过反射解析你的bean的元信息，我就拿到你所有的信息了，你啥时候需要，我直接给你提供，告诉我你需要啥，我就都能反给你，第三方的好处。</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">private</span> String <span class="hljs-title">get</span><span class="hljs-params">(String key,ProcessdingJoinPoint pjp)</span> </span>&#123;</span><br><span class="line">    java.lang.reflect.Method method = ((MethodSignature)pjp.getSignature()).getMethod();</span><br><span class="line">    Stringp[] parameterNames = <span class="hljs-keyword">new</span> org.spring.framework.core.LocalVariableTableParameterNameDiscoverer().getParameterNames(method);</span><br><span class="line">    <span class="hljs-comment">// key为 currentPage = "#currentPage",pageSize="#pageSize",showTag = true 的 #currentPage</span></span><br><span class="line">    <span class="hljs-comment">// parameterNames是通过spring拿到的</span></span><br><span class="line">    <span class="hljs-comment">// pjp.getArgs() 实际的参数值数组</span></span><br><span class="line">    <span class="hljs-comment">// 说白了就是通过Spel 解析 #currentPage  然后pjp.getArgs() 把值给它</span></span><br><span class="line">   	<span class="hljs-keyword">return</span> SpelParser.get(key,parameterNames,pjp.getArgs()); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SpelParser.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpelParser</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ExpressionParser parser = <span class="hljs-keyword">new</span> SpelExpressionParser();</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">get</span><span class="hljs-params">(String key,String[] parameterNames,Object[] args)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (args.length &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    StandardEvaluationContext cxt = <span class="hljs-keyword">new</span> StandardEvaluationContext();</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ,len = args.length; i &lt; len; i ++) &#123;</span><br><span class="line">      ctx.setVariable(parameterNames[i],args[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    Expression expression = parser.parser.parseExpression(key);</span><br><span class="line">    <span class="hljs-keyword">return</span> expression.getValue(cxt,String.class);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/spring-aop-实战应用/">spring aop 实战应用</a>, <a class="has-link-grey -link" href="/tags/spring-mvc-高级玩儿法/">spring mvc 高级玩儿法</a>
+                </div>
+            </div>
         </div>
         
         
@@ -189,9 +233,55 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/04/Structured-Streaming/">
+                <span class="level-item">Structured Streaming Programming Guide</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -1175,7 +1265,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="曲奇小猪的测试博客" height="28">
+                    <img src="/images/logo.svg" alt="玩儿转spring（一）" height="28">
                 
                 </a>
                 <p class="is-size-7">
