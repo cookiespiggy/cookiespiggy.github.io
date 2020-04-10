@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="spring mvc 高级玩儿法,spring aop 实战应用,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#spring mvc 高级玩儿法  需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒   1、springmvc参数解析  页面请求带参数 lxTime:st-et 定义注解如  1234567@Target(ElementType.PARAMETER)@Retention(RetentionPolicy.RUNTIME)@Documentedpublic @inte">
+<meta name="keywords" content="spring mvc 高级玩儿法,spring aop 实战应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩儿转spring（一）">
+<meta property="og:url" content="http://yoursite.com/2019/11/07/玩儿转spring（一）/index.html">
+<meta property="og:site_name" content="曲奇小猪的测试博客">
+<meta property="og:description" content="#spring mvc 高级玩儿法  需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒   1、springmvc参数解析  页面请求带参数 lxTime:st-et 定义注解如  1234567@Target(ElementType.PARAMETER)@Retention(RetentionPolicy.RUNTIME)@Documentedpublic @inte">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-07T04:01:57.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩儿转spring（一）">
+<meta name="twitter:description" content="#spring mvc 高级玩儿法  需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒   1、springmvc参数解析  页面请求带参数 lxTime:st-et 定义注解如  1234567@Target(ElementType.PARAMETER)@Retention(RetentionPolicy.RUNTIME)@Documentedpublic @inte">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/07/玩儿转spring（一）/">
+
+
+
+
+
+  <title>玩儿转spring（一） | 曲奇小猪的测试博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">曲奇小猪的测试博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/07/玩儿转spring（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="曲奇小猪">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="曲奇小猪的测试博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">玩儿转spring（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T11:02:43+08:00">
+                2019-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#spring mvc 高级玩儿法</p>
+<blockquote>
+<p>需求分析：想定制化request参数，当时前后端都自己写，就用此方法偷了个懒</p>
+</blockquote>
+<p> 1、springmvc参数解析</p>
+<ul>
+<li>页面请求带参数 lxTime:st-et</li>
+<li>定义注解如</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.PARAMETER)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CurrentTime&#123;</span><br><span class="line">  <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> “lxTime；</span></span><br><span class="line"><span class="function">  <span class="keyword">boolean</span> <span class="title">required</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">true</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义Pojo接收st、et</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeParam</span></span>&#123;</span><br><span class="line">  <span class="comment">// 省略getter、setter lombok</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">long</span> st;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">long</span> et;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>继承AbstractNamedValueMethodArgumentResolver(其实就是要实现HandlerMethodArgumentResolver,只不过Spring默认给我们提供一个抽象实现，都是这种设计。Interface，Abs实现通用的，我们继承Abs即可)</p>
+</li>
+<li><p>Controller层使用</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">method(<span class="meta">@CurrentTime</span>() TimeParam t) &#123;</span><br><span class="line">  <span class="keyword">long</span> st = t.getSt();</span><br><span class="line">  <span class="keyword">long</span> et = t.getEt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="aop的应用之简单复杂重复逻辑分页"><a href="#aop的应用之简单复杂重复逻辑分页" class="headerlink" title="aop的应用之简单复杂重复逻辑分页"></a>aop的应用之简单复杂重复逻辑分页</h1><blockquote>
+<p>当时前后端都自己写，也想偷懒。</p>
+<p>需要分析：前端页面需要显示3个Table，需要分页，但是有的Table的row数据都需要查询某某表并打标签（sql可以做，但是没用，想拿aop练练手），相似的逻辑，怎么办？用aop</p>
+<p>需要解决俩难度问题：</p>
+<ul>
+<li>切面类如何拿到我请求参数中的值</li>
+<li>分页也可以用aop做，必须的，用@Around环绕，invoke之后把total塞回去</li>
+<li>idea做的真强大，aop定位相当准确</li>
+</ul>
+</blockquote>
+<p>开LU代码</p>
+<ul>
+<li>定义注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> UsePage &#123;</span><br><span class="line">  <span class="function">String <span class="title">currentPage</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function">String <span class="title">pageSize</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">showTag</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在你需要被切面切入的地方，使用这个注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正常情况话，切面是可以拿到注解的信息的，但是这种，我参数动态传，切面类如何拿到 好戏开始了</span></span><br><span class="line"><span class="meta">@UsePage</span>(currentPage = <span class="string">"#currentPage"</span>,pageSize=<span class="string">"#pageSize"</span>,showTag = <span class="keyword">true</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ApiResponse <span class="title">queryXxxPage</span> <span class="params">(Integer currentPage, Integer pageSize, ...)</span> </span>&#123;</span><br><span class="line">  List&lt;T&gt; list = xxxMapper.find...(不用传分页信息，...);</span><br><span class="line">  <span class="keyword">return</span> ApiResponse.ofSuccessPager(list,<span class="number">0</span>,<span class="keyword">true</span>); <span class="comment">// 0为total总数，先默认返回0，再由切面类补充上</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义切面类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UsePageAspect</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> XXXMappper xxxMapper; <span class="comment">// spring4 之后推荐构造注入，一开始就避免循环依赖问题</span></span><br><span class="line">  </span><br><span class="line">  <span class="meta">@Around</span>(<span class="string">"@annotation(up)"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">doAround</span><span class="params">(ProcessdingJoinPoint pjp,UsePage up)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    String currentPage = get(up.getCurrentPage(),pjp);</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 开启分页  mybatis的PageHelper插件</span></span><br><span class="line">    PageHelper.starPage(...);</span><br><span class="line">    Object obj = pjp.proceed();</span><br><span class="line">    PageInfo&lt;...&gt; pageInfo = <span class="keyword">new</span> PageInfo&lt;&gt;(list(obj)强制的);</span><br><span class="line">    <span class="comment">// 此处是把返回值强转成List&lt;T&gt;的，因为特定一类业务一个页面类嘛</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">boolean</span> showTag = up.showTag();</span><br><span class="line">    <span class="keyword">if</span>(showTag) &#123;</span><br><span class="line">      <span class="comment">// do something</span></span><br><span class="line">      <span class="comment">// 组装bean</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ApiResponse.ofSuccessPager(list是组装之后的List&lt;bean&gt;,pageInfo.getTotal()根据分页插件或者啥的拿到真正的count,<span class="keyword">true</span>); </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// LocalVariableTableParameterNameDiscoverer 说说spring其中的精髓，你把bean注册给我了，我通过反射解析你的bean的元信息，我就拿到你所有的信息了，你啥时候需要，我直接给你提供，告诉我你需要啥，我就都能反给你，第三方的好处。</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> String <span class="title">get</span><span class="params">(String key,ProcessdingJoinPoint pjp)</span> </span>&#123;</span><br><span class="line">    java.lang.reflect.Method method = ((MethodSignature)pjp.getSignature()).getMethod();</span><br><span class="line">    Stringp[] parameterNames = <span class="keyword">new</span> org.spring.framework.core.LocalVariableTableParameterNameDiscoverer().getParameterNames(method);</span><br><span class="line">    <span class="comment">// key为 currentPage = "#currentPage",pageSize="#pageSize",showTag = true 的 #currentPage</span></span><br><span class="line">    <span class="comment">// parameterNames是通过spring拿到的</span></span><br><span class="line">    <span class="comment">// pjp.getArgs() 实际的参数值数组</span></span><br><span class="line">    <span class="comment">// 说白了就是通过Spel 解析 #currentPage  然后pjp.getArgs() 把值给它</span></span><br><span class="line">   	<span class="keyword">return</span> SpelParser.get(key,parameterNames,pjp.getArgs()); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SpelParser.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpelParser</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> ExpressionParser parser = <span class="keyword">new</span> SpelExpressionParser();</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">get</span><span class="params">(String key,String[] parameterNames,Object[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (args.length &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    StandardEvaluationContext cxt = <span class="keyword">new</span> StandardEvaluationContext();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ,len = args.length; i &lt; len; i ++) &#123;</span><br><span class="line">      ctx.setVariable(parameterNames[i],args[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    Expression expression = parser.parser.parseExpression(key);</span><br><span class="line">    <span class="keyword">return</span> expression.getValue(cxt,String.class);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring-mvc-高级玩儿法/" rel="tag"># spring mvc 高级玩儿法</a>
+          
+            <a href="/tags/spring-aop-实战应用/" rel="tag"># spring aop 实战应用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/04/Structured-Streaming/" rel="next" title="Structured Streaming Programming Guide">
+                <i class="fa fa-chevron-left"></i> Structured Streaming Programming Guide
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/20/玩儿转大数据环境/" rel="prev" title="玩儿转大数据环境">
+                玩儿转大数据环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="曲奇小猪">
+            
+              <p class="site-author-name" itemprop="name">曲奇小猪</p>
+              <p class="site-description motion-element" itemprop="description">天津理工大学(11级计算机系)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#aop的应用之简单复杂重复逻辑分页"><span class="nav-number">1.</span> <span class="nav-text">aop的应用之简单复杂重复逻辑分页</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">曲奇小猪</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
